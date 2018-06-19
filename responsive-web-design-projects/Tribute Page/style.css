@@ -1,0 +1,23 @@
+#main {
+  width: 85vw;
+  margin: auto;
+}
+
+#title, #img-div, #tribute-info p{
+  text-align: center;
+}
+
+#title p {
+  font-size: 20px;
+}
+
+#tribute-info {
+  width: 50vw;
+  margin: 0 auto;
+}
+
+#image {
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+}

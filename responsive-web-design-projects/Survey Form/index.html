@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+    <h1 id="title">Survey Form</h1>
+    <form id="survey-form">
+      <p id="description">Contact me to build your site</p>
+
+      <label for="dropdown">Title:</label>
+      <select id="dropdown" name="dropdown">
+      	<option value="mr">Mr.</option>
+      	<option value="mrs">Mrs.</option>
+      	<option value="miss">Miss</option>
+      	<option value="ms">Ms.</option>
+        <option value="dr">Dr.</option>
+      </select>
+
+      <label for="name" id="name-label">*Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email" id="email-label">*Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="number" id="number-label">Years in business:</label>
+      <input type="number" id="number" name="number" placeholder="How many years have you been in business?" min="0" max="100">
+
+      <label for="radio-list">What type of website do you want?</label>
+      <section id="radio-group">
+        <input id="business" type="radio" name="radio-list" value="business">
+        <label for="business">Business</label><br>
+        <input id="personal" type="radio" name="radio-list" value="personal">
+        <label for="personal">Personal</label><br>
+      </section>
+
+      <label for="checkbox-list">What features do you want <br> on your site?
+      <br> (Check all that apply): </label>
+      <section id="checkbox-group">
+        <input id="blog" type="checkbox" name="checkbox-list" value="blog">
+        <label for="blog">Blog</label><br>
+        <input id="ecommerce" type="checkbox" name="checkbox-list" value="ecommerce">
+        <label for="ecommerce">E-commerce shopping cart</label><br>
+        <input id="member" type="checkbox" name="checkbox-list" value="member">
+        <label for="member">Member/User management</label>
+      </section>
+
+      <label for="text-area">Additional Comments:</label>
+      <textarea id="textarea-group">
+      </textarea>
+
+      <section id="submit-section">
+        <button id="submit" type="submit">Submit</button>
+      </section>
+
+    </form>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+body {
+  background-color: #a9d7d1;
+}
+
+#title{
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+#description {
+  grid-area: description;
+  text-align: center;
+}
+
+label[for="name"] {
+  display: table-cell;
+}
+
+#name {
+  grid-area: name-content;
+}
+
+label[for="email"] {
+  grid-area: form-email;
+}
+
+#email {
+  grid-area: email-content;
+}
+
+label[for="number"] {
+  grid-area: form-number;
+}
+
+#number {
+  grid-area: number-content;
+}
+
+label[for="dropdown"] {
+  grid-area: form-dropdown;
+}
+
+#dropdown {
+  grid-area: dropdown-content;
+}
+
+label[for="radio-list"] {
+  grid-area: form-radio;
+}
+
+#radio-group {
+  grid-area: radio-content;
+}
+
+label[for="checkbox-list"] {
+  grid-area: form-checkbox;
+}
+
+#checkbox-group {
+  grid-area: checkbox-content;
+}
+
+label[for="text-area"] {
+  grid-area: form-textarea;
+}
+
+label[for="name"],
+label[for="email"],
+label[for="number"],
+label[for="dropdown"],
+label[for="radio-list"],
+label[for="checkbox-list"],
+label[for="text-area"] {
+  text-align: right;
+}
+
+label[for="name"],
+label[for="email"],
+label[for="number"],
+label[for="dropdown"],
+label[for="text-area"] {
+  align-self: center;
+}
+
+label[for="radio-list"],
+label[for="checkbox-list"]{
+  align-self: top;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  height: 20px;
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+select {
+  width: 140px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+textarea {
+  height: 100px;
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+#textarea-group {
+  grid-area: textarea-content;
+}
+
+#submit-section {
+  grid-area: footer;
+  text-align: center;
+}
+
+#survey-form {
+  min-height: 300px;
+  width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  background: white;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  grid-template-areas:
+    "description description "
+    "form-dropdown dropdown-content"
+    "form-name name-content"
+    "form-email email-content"
+    "form-number number-content"
+    "form-radio radio-content"
+    "form-checkbox checkbox-content"
+    "form-textarea textarea-content"
+    "footer footer ";
+}
