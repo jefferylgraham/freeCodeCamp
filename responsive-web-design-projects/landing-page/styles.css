@@ -109,3 +109,9 @@ footer {
 footer nav {
   float: right;
 }
+
+@media (max-width: 800px) {
+  p {
+    font-size: 10px;
+  }
+}
