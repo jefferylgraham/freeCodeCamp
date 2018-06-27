@@ -3,8 +3,7 @@
   padding: 0;
 }
 #navbar {
-  top: 0;
-  background-color: #1abc9c;
+  background-color: #f2f2f2;
   position: fixed;
   width: 100%;
   text-align: right;
@@ -16,7 +15,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1abc9c;
+    background-color: #f2f2f2;
 }
 
 #navbar li {
@@ -25,7 +24,6 @@
 
 #navbar li a {
     display: block;
-    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -33,18 +31,21 @@
 
 #navbar li a:hover {
     background-color: #111;
+    color: white;
 }
 
 #welcome-section {
-  padding-top: 60px;
+  top: 0;
+  padding-top: 45vh;
   background-color: #f2f2f2;
   text-align: center;
-  min-height: 100vh;
+  min-height: 55vh;
   margin: auto;
 }
 
 #welcome-section img {
   border-radius: 50%;
+  margin-bottom: 20px;
 }
 
 #welcome-section .info {
@@ -54,10 +55,15 @@
 
 #projects {
   display: grid;
-  grid-template-columns: auto auto: ;
+  grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
   text-align: center;
   padding-bottom: 50px;
+}
+
+#projects h2 {
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 .project-tile img {
@@ -80,10 +86,19 @@
   margin: auto;
 }
 
+#profile-link button {
+  border-radius: 5%;
+  padding: 5px;
+}
+
 #contact {
   text-align: center;
   padding-top: 160px;
   padding-bottom: 160px;
+}
+
+#contact h1 {
+  padding-bottom: 20px;
 }
 
 #contact a {
@@ -96,4 +111,16 @@
   border-radius: 50%;
   text-decoration: none;
   font-weight: bold;
+}
+
+@media (max-width: 769px) {
+  #projects {
+    grid-template-columns: auto;
+    width: 95vw;
+  }
+
+
+  .project-section, #profile-link {
+    grid-column: 1 / 2;
+  }
 }
