@@ -1,15 +1,14 @@
-html,
-body {
+* {
   margin: 0;
-  height: 100%;
+  padding: 0;
 }
-
 #navbar {
+  top: 0;
   background-color: #1abc9c;
   position: fixed;
   width: 100%;
   text-align: right;
-  top: 0;
+  display: block;
 }
 
 #navbar ul {
@@ -37,10 +36,11 @@ body {
 }
 
 #welcome-section {
-  padding-top: 25px;
+  padding-top: 60px;
   background-color: #f2f2f2;
-  margin-top: 50px;
   text-align: center;
+  min-height: 100vh;
+  margin: auto;
 }
 
 #welcome-section img {
@@ -60,7 +60,7 @@ body {
   padding-bottom: 50px;
 }
 
-.project img {
+.project-tile img {
   width: 280px;
   border: 1px solid #555;
 }
@@ -70,12 +70,12 @@ body {
 }
 
 .project-section,
-#all-projects {
+#profile-link {
     grid-column: 1 / 3;
 }
 
 
-#all-projects {
+#profile-link {
   width: 100px;
   margin: auto;
 }
