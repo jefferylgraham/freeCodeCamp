@@ -1,0 +1,126 @@
+html,
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#header {
+  height: 75px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 95%;
+  margin: auto;
+}
+
+#header-img {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+nav li {
+  list-style: none;
+  display: inline;
+  float: right;
+}
+
+nav a {
+  display: block;
+  padding: 8px;
+}
+
+main {
+  flex 1;
+  overflow: auto;
+}
+
+section {
+  height: 100%;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#form-section {
+  clear: both;
+  text-align: center;
+}
+
+input[type="email"] {
+  height: 20px;
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+input[type="submit"] {
+  height: 30px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 2px;
+}
+
+#features {
+  width: 960px;
+  margin: auto;
+}
+
+#video-section {
+  text-align: center;
+}
+
+video {
+  width: 560px;
+}
+
+#colors {
+  font-size: 24px;
+  width: 960px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#colors div {
+  border: 1px solid #ddd;
+}
+
+#colors img {
+  width: 300px;
+}
+
+footer {
+  width: 95%;
+  margin: auto;
+}
+
+footer nav {
+  float: right;
+}
+
+@media (max-width: 360px) {
+  #features {
+    width: 95vw;
+  }
+
+  #video {
+    width: 95vw;
+  }
+
+  #colors {
+    width: 95vw;
+    grid-template-columns: auto;
+  }
+}

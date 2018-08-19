@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Technical Documentation: Python</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <section id="left" class="column">
+        <aside class="bottom">
+          <nav id="navbar">
+            <header>
+              <h1>Python</h1>
+            </header>
+            <ul>
+              <a class="nav-link" href="#Introduction"><li>Introduction</li></a>
+              <a class="nav-link" href="#Getting_Started"><li>Getting Started</li></a>
+              <a class="nav-link" href="#Syntax"><li>Syntax</li></a>
+              <a class="nav-link" href="#Variables"><li>Variables</li></a>
+              <a class="nav-link" href="#Numbers"><li>Numbers</li></a>
+            </ul>
+          </nav>
+        </aside>
+    </section>
+
+    <section id="right" class="column">
+        <main id="main-doc">
+          <section id="Introduction" class="main-section">
+            <header>
+              <h2>Introduction</h2>
+            </header>
+            <h3>What is Python?</h3>
+            <p>
+              Python is a popular programming language. It was created in 1991
+              by Guido van Rossum.
+            </p>
+
+            <ul>
+              <p>
+                It is used for:
+              </p>
+              <li>web development (server-side),</li>
+              <li>software deployment,</li>
+              <li>mathematics,</li>
+              <li>system scripting,</li>
+            </ul>
+
+            <h4>What can Python do?</h4>
+            <ul>
+              <li>
+                Python can be used on a server to create web applications.
+              </li>
+              <li>
+                Python can be used alongside software to create workflows.
+              </li>
+              <li>
+                Python can connect to database systems. It can also read and
+                modify files.
+              </li>
+              <li>
+                Python can be used to handle big data and perform complex
+                mathematics.
+              </li>
+              <li>
+                Python can be used for rapid prototyping, or for production-ready
+                software development.
+              </li>
+            </ul>
+
+            <h4>Why Python?</h4>
+            <ul>
+              <li>
+                Python works on different platforms (Windows, Mac, Linux,
+                Raspberry Pi, etc).
+              </li>
+              <li>
+                Python has a simple syntax similar to the English language.
+              </li>
+              <li>
+                Python has syntax that allows developers to write programs with
+                fewer lines than some other programming languages.
+              </li>
+              <li>
+                Python runs on an interpreter system, meaning that code can be
+                executed as soon as it is written. This means that prototyping
+                can be very quick.
+              </li>
+              <li>
+                Python can be treated in a procedural way, an object-orientated
+                way or a functional way.
+              </li>
+            </ul>
+
+            <h4>Good to know</h4>
+            <ul>
+              <li>
+                The most recent major version of Python is Python 3, which we
+                shall be using in this tutorial. However, Python 2, although not
+                being updated with anything other than security updates, is
+                still quite popular.
+              </li>
+              <li>
+                In this tutorial Python will be written in a text editor. It is
+                possible to write Python in an Integrated Development
+                Environment, such as Thonny, Pycharm, Netbeans or Eclipse which
+                are particularly useful when managing larger collections of
+                Python files.
+              </li>
+            </ul>
+
+            <h4>Python Syntax compared to other programming languages</h4>
+            <ul>
+              <li>
+                Python was designed to for readability, and has some similarities
+                to the English language with influence from mathematics.
+              </li>
+              <li>
+                Python uses new lines to complete a command, as opposed to other
+                programming languages which often use semicolons or parentheses.
+              </li>
+              <li>
+                Python relies on indentation, using whitespace, to define scope;
+                such as the scope of loops, functions and classes. Other
+                programming languages often use curly-brackets for this purpose.
+              </li>
+            </ul>
+          </section>
+
+          <section id="Getting_Started" class="main-section">
+            <header>
+              <h2>Getting Started</h2>
+            </header>
+
+            <h3>Python Install</h3>
+            <p>
+              Many PCs and Macs will have python already installed.
+            </p>
+
+            <p>
+              To check if you have python installed on a Windows PC, search in
+              the start bar for Python or run the following on the Command Line
+              (cmd.exe):
+            </p>
+            <div class="code-background">
+              <code class="code-black">C:\Users\<em>Your Name</em>>python --version</code>
+            </div>
+
+            <p>
+              To check if you have python installed on a Linux or Mac, then on
+              linux open the command line or on Mac open the Terminal and type:
+            </p>
+            <div class="code-background">
+              <code class="code-black">python --version</code>
+            </div>
+
+            <p>
+              If you find that you do not have python installed on your
+              computer, then you can download it for free from the
+              following website:
+              <a href="https://www.python.org/" target="_blank">
+                https://www.python.org/
+              </a>
+            </p>
+
+            <h3>Python Quickstart</h3>
+            <p>
+              Python is an interpreted programming language, this means that as
+              a developer you write Python (.py) files in a text editor and then
+              put those files into the python interpreter to be executed.
+            </p>
+
+            <p>
+              The way to run a python file is like this on the command line:
+            </p>
+            <div class="code-background">
+              <code class="code-black">C:\Users\<em>Your Name</em>>python helloworld.py</code>
+            </div>
+            <p>
+              Where "helloworld.py" is the name of your python file.
+            </p>
+
+            <p>
+              Let's write our first Python file, called helloworld.py, which can
+              be done in any text editor.
+            </p>
+
+
+            <div class="code-background">
+              <p>
+                helloworld.py
+              </p>
+              <code class="code-white">print("Hello, World!")</code>
+            </div>
+
+            <p>
+              Simple as that. Save your file. Open your command line,
+              navigate to the directory where you saved your file, and run:
+            </p>
+            <div class="code-background">
+              <code class="code-black">C:\Users\<em>Your Name</em>>python helloworld.py</code>
+            </div>
+
+            <p>
+              The output should read:
+            </p>
+            <div class="code-background">
+              <code class="code-black">Hello, World!</code>
+            </div>
+            <p>
+              Congratulations, you have written and executed your first Python program.
+            </p>
+
+            <h3>The Python Command Line</h3>
+            <p>
+              To test a short amount of code in python sometimes it is quickest
+              and easiest not to write the code in a file. This is made possible
+              because Python can be run as a command line itself.
+            </p>
+
+            <p>
+              Type the following on the Windows, Mac or Linux command line:
+            </p>
+
+            <div class="code-background">
+              <code class="code-black">C:\Users\<em>Your Name</em>>python</code>
+            </div>
+
+
+            <p>
+              From there you can write any python, including our hello world
+              example from earlier in the tutorial:
+            </p>
+
+            <div class="code-background">
+              <code class="code-black">
+                C:\Users\<em>Your Name</em>>python<br />
+                Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900
+                32 bit (Intel)] on win32<br />
+                Type "help", "copyright", "credits" or "license" for more
+                information.<br />
+                >>> print("Hello, World!")
+              </code>
+            </div>
+
+            <p>
+              Which will write "Hello, World!" in the command line:
+            </p>
+
+            <div class="code-background">
+              <code class="code-black">
+                C:\Users\<em>Your Name</em>>python<br />
+                Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900
+                32 bit (Intel)] on win32<br />
+                Type "help", "copyright", "credits" or "license" for more
+                information.<br />
+                >>> print("Hello, World!")<br />
+                Hello, World!
+              </code>
+            </div>
+
+            <p>
+              Whenever you are done in the python command line, you can simply
+              type the following to quit the python command line interface:
+            </p>
+            <div class="code-background">
+              <code class="code-black">exit()</code>
+            </div>
+          </section>
+
+          <section id="Syntax" class="main-section">
+            <header>
+              <h2>Syntax</h2>
+            </header>
+            <h3>Execute Python Syntax</h3>
+
+            <p>
+              As we learned in the previous page, Python syntax can be executed
+              by writing directly in the Command Line:
+            </p>
+            <div class="code-background">
+              <code class="code-black">
+                >>> print("Hello, World!")<br />
+                Hello, World!
+              </code>
+            </div>
+
+            <p>
+              Or by creating a python file on the server, using the .py file
+              extension, and running it in the Command Line:
+            </p>
+            <div class="code-background">
+              <code class="code-black">C:\Users\<em>Your Name</em>>python myfile.py</code>
+            </div>
+
+            <h3>Python Indentations</h3>
+            <p>
+              Where in other programming languages the indentation in code is
+              for readability only, in Python the indentation is very important.
+            </p>
+
+            <p>
+              Python uses indentation to indicate a block of code.
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                if 5 > 2:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;print("Five is greater than two!")
+              </code>
+            </div>
+
+            <p>
+              Python will give you an error if you skip the indentation:
+            </p>
+
+            <div class="error-code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                if 5 > 2:<br />
+                print("Five is greater than two!")
+              </code>
+            </div>
+
+            <h3>Comments</h3>
+            <p>
+              Python has commenting capability for the purpose of in-code
+              documentation.
+            </p>
+
+            <p>
+              Comments start with a #, and Python will render the rest of the
+              line as a comment:
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Comments in Python:
+              </p>
+              <code class="code-white">
+                #This is a comment.<br />
+              print("Hello, World!")
+              </code>
+            </div>
+
+
+            <h4>Docstrings</h4>
+            <p>
+              Python also has extended documentation capability, called
+              docstrings.
+            </p>
+
+            <p>
+              Docstrings can be one line, or multiline.
+            </p>
+
+            <p>
+              Python uses triple quotes at the beginning and end of the
+              docstring:
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Docstrings are also comments:
+              </p>
+              <code class="code-white">
+                """This is a <br />
+                multiline docstring.""" <br />
+                print("Hello, World!")
+              </code>
+            </div>
+          </section>
+
+          <section id="Variables" class="main-section">
+            <header>
+              <h2>Variables</h2>
+            </header>
+            <h3>Creating Variables</h3>
+            <p>
+              Unlike other programming languages, Python has no command for
+              declaring a variable.
+            </p>
+
+            <p>
+              A variable is created the moment you first assign a value to it.
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = 5 <br />
+                y = "John"<br />
+                print(x)<br />
+                print(y)<br />
+              </code>
+            </div>
+
+            <p>
+              Variables do not need to be declared with any particular type and
+              can even change type after they have been set.
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = 4 # x is of type int<br />
+                x = "Sally" # x is now of type str<br />
+                print(x)<br />
+              </code>
+            </div>
+
+            <h3>Variable Names</h3>
+            <p>
+              A variable can have a short name (like x and y) or a more
+              descriptive name (age, carname, total_volume). Rules for Python
+              variables:
+            </p>
+
+            <ul>
+              <li>
+                A variable name must start with a letter or the underscore character
+              </li>
+              <li>
+                A variable name cannot start with a number
+              </li>
+              <li>
+                A variable name can only contain alpha-numeric characters and
+                underscores (A-z, 0-9, and _ )
+              </li>
+              <li>
+                Variable names are case-sensitive (age, Age and AGE are three
+                different variables)
+              </li>
+            </ul>
+            <p>
+              Remember that variables are case-sensitive
+            </p>
+
+            <h3>Output Variables</h3>
+            <p>
+              The Python print statement is often used to output variables.
+            </p>
+
+            <p>
+              To combine both text and a variable, Python uses the + character:
+            </p>
+
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = "awesome"<br />
+                print("Python is " + x)
+              </code>
+            </div>
+
+            <p>
+              You can also use the + character to add a variable to another variable:
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = "Python is "<br />
+                y = "awesome"<br />
+                z =  x + y<br />
+                print(z)
+              </code>
+            </div>
+
+            <p>
+              For numbers, the + character works as a mathematical operator:
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = 5<br />
+                y = 10<br />
+                print(x + y)
+              </code>
+            </div>
+
+            <p>
+              If you try to combine a string and a number, Python will give you
+              an error:
+            </p>
+            <div class="error-code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = 5<br />
+                y = "John"<br />
+                print(x + y)
+              </code>
+            </div>
+          </section>
+
+          <section id="Numbers" class="main-section">
+            <header>
+              <h2>Numbers</h2>
+            </header>
+            <h3>Python Numbers</h3>
+
+            <p>
+              There are three numeric types in Python:
+            </p>
+            <ul>
+              <li>
+                int
+              </li>
+              <li>
+                float
+              </li>
+              <li>
+                complex
+              </li>
+            </ul>
+
+            <p>
+              Variables of numeric types are created when you assign a value to
+              them:
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <code class="code-white">
+                x = 1    # int<br />
+                y = 2.8  # float<br />
+                z = 1j   # complex
+              </code>
+            </div>
+
+            <div>
+              <p>
+                To verify the type of any object in Python, use the type() function:
+              </p>
+              <div class="code-background">
+                <h4>Example</h4>
+                <code class="code-white">
+                  print(type(x))<br />
+                  print(type(y))<br />
+                  print(type(z))
+                </code>
+              </div>
+            </div>
+
+            <h3>Int</h3>
+
+            <p>
+              Int, or integer, is a whole number, positive or negative, without
+              decimals, of unlimited length.
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Integers:
+              </p>
+              <code class="code-white">
+                x = 1<br />
+                y = 35656222554887711<br />
+                z = -3255522<br />
+                <br />
+                print(type(x))<br />
+                print(type(y))<br />
+                print(type(z))
+              </code>
+            </div>
+
+            <h3>Float</h3>
+
+            <p>
+              Float, or "floating point number" is a number, positive or
+              negative, containing one or more decimals.
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Floats:
+              </p>
+              <code class="code-white">
+                x = 1.10<br />
+                y = 1.0<br />
+                z = -35.59<br />
+                <br />
+                print(type(x))<br />
+                print(type(y))<br />
+                print(type(z))
+              </code>
+            </div>
+
+            <p>
+              Float can also be scientific numbers with an "e" to indicate the
+              power of 10.
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Floats:
+              </p>
+              <code class="code-white">
+                x = 35e3<br />
+                y = 12e4<br />
+                z = -87.7e100<br />
+                <br />
+                print(type(x))<br />
+                print(type(y))<br />
+                print(type(z))
+              </code>
+            </div>
+
+            <h3>Complex</h3>
+
+            <p>
+              Complex numbers are written with a "j" as the imaginary part:
+            </p>
+            <div class="code-background">
+              <h4>Example</h4>
+              <p>
+                Complex:
+              </p>
+              <code class="code-white">
+                x = 3+5j<br />
+                y = 5j<br />
+                z = -5j<br />
+                <br />
+                print(type(x))<br />
+                print(type(y))<br />
+                print(type(z))
+              </code>
+            </div>
+          </section>
+
+        </main>
+    </section>
+  </body>
+</html>
