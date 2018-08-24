@@ -1,6 +1,5 @@
 function checkCashRegister(price, cash, cid) {
   let changeDue = cash - price;
-
   let changeGiven = 0.00; 
   let exactChange = 0.00;
   let currentCash, cashIndex, denomination;
@@ -11,7 +10,7 @@ function checkCashRegister(price, cash, cid) {
     NICKEL: 0.05,
     DIME: 0.10,
     QUARTER: 0.25,
-    DOLLAR: 1.00,
+    ONE: 1.00,
     FIVE: 5.00,
     TEN: 10.00,
     TWENTY: 20.00,
@@ -23,15 +22,11 @@ function checkCashRegister(price, cash, cid) {
     NICKEL: 0,
     DIME: 0,
     QUARTER: 0,
-    DOLLAR: 0,
+    ONE: 0,
     FIVE: 0,
     TEN: 0,
     TWENTY: 0,
     "ONE HUNDRED": 0
-  }
-
-  function convert(num) {
-    return Number.parseFloat(num).toFixed(2);
   }
 
   function findCashIndex(arr, val) {
@@ -54,7 +49,7 @@ function checkCashRegister(price, cash, cid) {
     arr[index][1] -= cashRemoved;
     let newVal = parseFloat(arr[index][1].toFixed(2));
     arr[index][1] = newVal;
-    return cashRemoved;
+    return parseFloat(cashRemoved);
   }
 
   function findDenomination(change) {
@@ -79,9 +74,10 @@ function checkCashRegister(price, cash, cid) {
         return "PENNY";
     }
   }
-
+  
   denomination = findDenomination(changeDue);
   cashIndex = findCashIndex(cid, denomination);
+
   exactChangeArr = cid.slice(0, cashIndex + 1);
   exactChange = countMoney(exactChangeArr, exactChange);
 
@@ -93,23 +89,36 @@ function checkCashRegister(price, cash, cid) {
   if (currentCash === changeDue) {
     return {status: "CLOSED", change: cid};
   }
+
+  while (cashIndex > 0) {
+    if (cid[cashIndex][1] > 0) {
+      changeGiven = removeCash(cid, cashIndex);
+      //remove change from drawer
+      changeDue = changeDue.toFixed(2) - changeGiven.toFixed(2);
+      if (changeDue.toFixed(2) < changeGiven.toFixed(2)) {
+        cashIndex--;
+      }
+      console.log(changeDue);
+    }
+    else {
+      cashIndex--;
+    }
+  }
+
+  for (let prop in changeGivenObj) {
+    if (changeGivenObj[prop] === 0) {
+      delete changeGivenObj[prop];
+    }
+  }
+
+  let result = Object.keys(changeGivenObj).map(function(key) {
+    return [key, changeGivenObj[key]]
+  });
+
+  console.log(cid);
+
+  return {status: "OPEN", change: [...result]};
   
-  // while (changeDue > 0) {
-  //   if ((changeDue.toFixed(2) % cashEquiv[denomination] !== changeDue.toFixed(2)) &&
-  //     (cid[cashIndex][1] !== 0)) {
-  //       changeGiven = removeCash(cid, cashIndex);
-  //       changeGivenObj[denomination] += parseFloat(changeGiven);
-  //       let newVal = convert(changeGivenObj[denomination])
-  //       changeDue -= changeGiven;
-  //     }
-  //   else {
-  //     cashIndex--;
-  //     if (cashIndex < 0) {
-  //       break;
-  //     }
-  //     denomination = cid[cashIndex][0];
-  //   }
-  // }
 }
 
 // Example cash-in-drawer array:
