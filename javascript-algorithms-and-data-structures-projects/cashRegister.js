@@ -49,6 +49,7 @@ function checkCashRegister(price, cash, cid) {
     arr[index][1] -= cashRemoved;
     let newVal = parseFloat(arr[index][1].toFixed(2));
     arr[index][1] = newVal;
+    changeGivenObj[arr[index][0]] += parseFloat(cashRemoved);
     return parseFloat(cashRemoved);
   }
 
@@ -90,14 +91,11 @@ function checkCashRegister(price, cash, cid) {
     return {status: "CLOSED", change: cid};
   }
 
-  while (cashIndex > 0) {
-    if (cid[cashIndex][1] > 0) {
+  while (cashIndex >= 0) {
+    if (cid[cashIndex][1] > 0 && changeDue >= cashEquiv[cid[cashIndex][0]]) {
       changeGiven = removeCash(cid, cashIndex);
       //remove change from drawer
       changeDue = changeDue.toFixed(2) - changeGiven.toFixed(2);
-      if (changeDue.toFixed(2) < changeGiven.toFixed(2)) {
-        cashIndex--;
-      }
       console.log(changeDue);
     }
     else {
@@ -115,9 +113,7 @@ function checkCashRegister(price, cash, cid) {
     return [key, changeGivenObj[key]]
   });
 
-  console.log(cid);
-
-  return {status: "OPEN", change: [...result]};
+  return {status: "OPEN", change: [...result.reverse()]};
   
 }
 
