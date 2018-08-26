@@ -1,2 +1,5 @@
-# ignore workspace file type
+# ignore workspace file types
 *.code-workspace
+
+# ignore specific files
+.eslintrc.json
