@@ -10,13 +10,13 @@ class QuoteBox extends React.Component {
     this.state = {
       isLoaded: false,
       quotes: [],
-      bgColor: "rgb(" + x + "," + y + "," + y + ")"
+      color: "rgb(" + x + "," + y + "," + y + ")"
     };
     this.changeQuote = this.changeQuote.bind(this);
   }
 
   componentDidMount() {
-    document.body.style.background = this.state.bgColor;
+    document.body.style.background = this.state.color;
     fetch(
       "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
     )
@@ -42,14 +42,15 @@ class QuoteBox extends React.Component {
     var newGreen = Math.floor(Math.random() * 256);
     var newBlue = Math.floor(Math.random() * 256);
     this.setState({
-      bgColor: "rgb(" + newRed + "," + newGreen + "," + newBlue + ")"
+      color: "rgb(" + newRed + "," + newGreen + "," + newBlue + ")"
     });
-    document.body.style.background = this.state.bgColor;
   }
 
   render() {
     const { error, isLoaded, quotes } = this.state;
     let index = Math.floor(Math.random() * quotes.length);
+
+    document.body.style.background = this.state.color;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -61,15 +62,26 @@ class QuoteBox extends React.Component {
           <div className="row justify-content-center">
             <div id="quote-box" className="col-5">
               <div>
-                <QuoteText quoteText={quotes[index].quote} />
-                <QuoteAuthor quoteAuthor={quotes[index].author} />
+                <QuoteText
+                  color={this.state.color}
+                  quoteText={quotes[index].quote}
+                />
+                <QuoteAuthor
+                  color={this.state.color}
+                  quoteAuthor={quotes[index].author}
+                />
               </div>
               <div>
                 <TweetQuote
+                  color={this.state.color}
                   tweetText={quotes[index].quote}
                   tweetAuthor={quotes[index].author}
                 />
-                <NewQuote onClick={this.changeQuote} text="New Quote" />
+                <NewQuote
+                  color={this.state.color}
+                  onClick={this.changeQuote}
+                  text="New Quote"
+                />
               </div>
             </div>
           </div>
@@ -81,14 +93,18 @@ class QuoteBox extends React.Component {
 
 class QuoteText extends React.Component {
   render() {
-    return <blockquote id="text">{this.props.quoteText}</blockquote>;
+    return (
+      <blockquote style={{ color: this.props.color }} id="text">
+        {this.props.quoteText}
+      </blockquote>
+    );
   }
 }
 
 class QuoteAuthor extends React.Component {
   render() {
     return (
-      <p id="author">
+      <p style={{ color: this.props.color }} id="author">
         <cite>~ {this.props.quoteAuthor}</cite>
       </p>
     );
@@ -99,6 +115,7 @@ class TweetQuote extends React.Component {
   render() {
     return (
       <a
+        style={{ color: this.props.color }}
         id="tweet-quote"
         target="_blank"
         href={
@@ -117,7 +134,11 @@ class TweetQuote extends React.Component {
 class NewQuote extends React.Component {
   render() {
     return (
-      <button id="new-quote" onClick={this.props.onClick}>
+      <button
+        style={{ color: this.props.color }}
+        id="new-quote"
+        onClick={this.props.onClick}
+      >
         {this.props.text}
       </button>
     );
