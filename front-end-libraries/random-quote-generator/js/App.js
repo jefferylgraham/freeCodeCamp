@@ -135,7 +135,7 @@ class NewQuote extends React.Component {
   render() {
     return (
       <button
-        style={{ color: this.props.color }}
+        style={{ backgroundColor: this.props.color }}
         id="new-quote"
         onClick={this.props.onClick}
       >
