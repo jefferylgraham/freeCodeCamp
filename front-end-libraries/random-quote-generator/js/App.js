@@ -53,11 +53,11 @@ class QuoteBox extends React.Component {
                 <QuoteAuthor quoteAuthor={quotes[index].author} />
               </div>
               <div>
-                <TweetQuote />
-                <NewQuote
-                  onClick={this.changeQuote}
-                  text={this.state.isToggleOn ? "ON" : "OFF"}
+                <TweetQuote
+                  tweetText={quotes[index].quote}
+                  tweetAuthor={quotes[index].author}
                 />
+                <NewQuote onClick={this.changeQuote} text="New Quote" />
               </div>
             </div>
           </div>
@@ -82,9 +82,17 @@ class QuoteAuthor extends React.Component {
 class TweetQuote extends React.Component {
   render() {
     return (
-      <button>
+      <a
+        target="_blank"
+        href={
+          "https://twitter.com/intent/tweet?hashtags=quotes&text=" +
+          this.props.tweetText +
+          " ~ " +
+          this.props.tweetAuthor
+        }
+      >
         <i className="fab fa-twitter-square" />
-      </button>
+      </a>
     );
   }
 }
