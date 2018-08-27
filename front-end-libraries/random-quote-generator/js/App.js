@@ -4,7 +4,6 @@ class QuoteBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isToggleOn: true,
       isLoaded: false,
       quotes: []
     };
@@ -33,13 +32,13 @@ class QuoteBox extends React.Component {
   }
 
   changeQuote() {
-    this.setState({
-      isToggleOn: !this.state.isToggleOn
-    });
+    this.setState({});
   }
 
   render() {
     const { error, isLoaded, quotes } = this.state;
+    let index = Math.floor(Math.random() * quotes.length);
+
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -50,8 +49,8 @@ class QuoteBox extends React.Component {
           <div className="row justify-content-center">
             <div className="col-5">
               <div>
-                <QuoteText quoteText={quotes[0].quote} />
-                <QuoteAuthor quoteAuthor={quotes[0].author} />
+                <QuoteText quoteText={quotes[index].quote} />
+                <QuoteAuthor quoteAuthor={quotes[index].author} />
               </div>
               <div>
                 <TweetQuote />
