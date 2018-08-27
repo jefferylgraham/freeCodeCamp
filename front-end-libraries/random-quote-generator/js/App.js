@@ -1,16 +1,22 @@
 "use strict";
 
+var x = Math.floor(Math.random() * 256);
+var y = Math.floor(Math.random() * 256);
+var z = Math.floor(Math.random() * 256);
+
 class QuoteBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
-      quotes: []
+      quotes: [],
+      bgColor: "rgb(" + x + "," + y + "," + y + ")"
     };
     this.changeQuote = this.changeQuote.bind(this);
   }
 
   componentDidMount() {
+    document.body.style.background = this.state.bgColor;
     fetch(
       "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
     )
@@ -32,7 +38,13 @@ class QuoteBox extends React.Component {
   }
 
   changeQuote() {
-    this.setState({});
+    var newRed = Math.floor(Math.random() * 256);
+    var newGreen = Math.floor(Math.random() * 256);
+    var newBlue = Math.floor(Math.random() * 256);
+    this.setState({
+      bgColor: "rgb(" + newRed + "," + newGreen + "," + newBlue + ")"
+    });
+    document.body.style.background = this.state.bgColor;
   }
 
   render() {
@@ -76,8 +88,8 @@ class QuoteText extends React.Component {
 class QuoteAuthor extends React.Component {
   render() {
     return (
-      <p>
-        <cite id="author">~ {this.props.quoteAuthor}</cite>
+      <p id="author">
+        <cite>~ {this.props.quoteAuthor}</cite>
       </p>
     );
   }
