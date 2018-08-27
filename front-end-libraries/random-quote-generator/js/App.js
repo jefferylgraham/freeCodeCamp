@@ -47,7 +47,7 @@ class QuoteBox extends React.Component {
       return (
         <div className="container-fluid">
           <div className="row justify-content-center">
-            <div className="col-5">
+            <div id="quote-box" className="col-5">
               <div>
                 <QuoteText quoteText={quotes[index].quote} />
                 <QuoteAuthor quoteAuthor={quotes[index].author} />
@@ -69,13 +69,17 @@ class QuoteBox extends React.Component {
 
 class QuoteText extends React.Component {
   render() {
-    return <p>{this.props.quoteText}</p>;
+    return <blockquote id="text">{this.props.quoteText}</blockquote>;
   }
 }
 
 class QuoteAuthor extends React.Component {
   render() {
-    return <p>{this.props.quoteAuthor}</p>;
+    return (
+      <p>
+        <cite id="author">~ {this.props.quoteAuthor}</cite>
+      </p>
+    );
   }
 }
 
@@ -83,6 +87,7 @@ class TweetQuote extends React.Component {
   render() {
     return (
       <a
+        id="tweet-quote"
         target="_blank"
         href={
           "https://twitter.com/intent/tweet?hashtags=quotes&text=" +
@@ -99,7 +104,11 @@ class TweetQuote extends React.Component {
 
 class NewQuote extends React.Component {
   render() {
-    return <button onClick={this.props.onClick}>{this.props.text}</button>;
+    return (
+      <button id="new-quote" onClick={this.props.onClick}>
+        {this.props.text}
+      </button>
+    );
   }
 }
 
