@@ -1,4 +1,11 @@
+class ToggleButton extends React.Component {
+  render() {
+    return (
+      <button>
+        <i class="fas fa-window-maximize" />
+      </button>
+    );
+  }
+}
 
-const element = <h1>Hello, JLG</h1>;
-
-ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(<ToggleButton />, document.getElementById("root"));
