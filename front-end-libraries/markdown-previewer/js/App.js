@@ -21,7 +21,7 @@ class Header extends React.Component {
 class Preview extends React.Component {
   render() {
     return (
-      <div>
+      <div className="col-8">
         <Header />
         <textarea />
       </div>
@@ -32,7 +32,7 @@ class Preview extends React.Component {
 class Editor extends React.Component {
   render() {
     return (
-      <div>
+      <div className="col-4">
         <Header />
         <textarea />
       </div>
@@ -43,9 +43,13 @@ class Editor extends React.Component {
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Editor />
-        <Preview />
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <Editor />
+        </div>
+        <div className="row justify-content-center">
+          <Preview />
+        </div>
       </div>
     );
   }

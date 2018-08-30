@@ -1,3 +1,10 @@
 * {
     border: 1px solid green;
 }
+
+button {
+    float: right;
+}
+ textarea {
+     width: 100%;
+ }
