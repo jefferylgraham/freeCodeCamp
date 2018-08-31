@@ -23,7 +23,7 @@ class Preview extends React.Component {
     return (
       <div className="col-8">
         <Header />
-        <textarea />
+        <textarea placeholder={this.props.previewText} />
       </div>
     );
   }
@@ -34,21 +34,29 @@ class Editor extends React.Component {
     return (
       <div className="col-4">
         <Header />
-        <textarea />
+        <textarea placeholder={this.props.editorText} />
       </div>
     );
   }
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editorInput: "Editor",
+      previewInput: "Preview"
+    };
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <Editor />
+          <Editor editorText={this.state.editorInput} />
         </div>
         <div className="row justify-content-center">
-          <Preview />
+          <Preview previewText={this.state.previewInput} />
         </div>
       </div>
     );
