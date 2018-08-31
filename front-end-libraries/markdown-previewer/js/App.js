@@ -1,4 +1,4 @@
-class ToggleButton extends React.Component {
+class EditorButton extends React.Component {
   render() {
     return (
       <button>
@@ -8,35 +8,37 @@ class ToggleButton extends React.Component {
   }
 }
 
-class Header extends React.Component {
+class PreviewButton extends React.Component {
   render() {
     return (
-      <header>
-        <ToggleButton />
-      </header>
+      <button>
+        <i className="fas fa-window-maximize" />
+      </button>
     );
+  }
+}
+
+class EditorText extends React.Component {
+  render() {
+    return <textarea />;
+  }
+}
+
+class PreviewText extends React.Component {
+  render() {
+    return <textarea />;
   }
 }
 
 class Preview extends React.Component {
   render() {
-    return (
-      <div className="col-8">
-        <Header />
-        <textarea placeholder={this.props.previewText} />
-      </div>
-    );
+    return <div className="col-8" />;
   }
 }
 
 class Editor extends React.Component {
   render() {
-    return (
-      <div className="col-4">
-        <Header />
-        <textarea placeholder={this.props.editorText} />
-      </div>
-    );
+    return <div className="col-4" />;
   }
 }
 
@@ -45,7 +47,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       editorInput: "Editor",
-      previewInput: "Preview"
+      previewInput: "Preview",
+      editorMinimized: true,
+      previewMinimized: true
     };
   }
 
@@ -53,10 +57,23 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <Editor editorText={this.state.editorInput} />
+          <div className="col-6">
+            <header>
+              Editor Header
+              <EditorButton />
+            </header>
+            <EditorText />
+          </div>
         </div>
+
         <div className="row justify-content-center">
-          <Preview previewText={this.state.previewInput} />
+          <div className="col-8">
+            <header>
+              Preview Header
+              <PreviewButton />
+            </header>
+            <PreviewText />
+          </div>
         </div>
       </div>
     );
