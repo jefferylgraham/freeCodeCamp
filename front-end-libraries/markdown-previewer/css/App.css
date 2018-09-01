@@ -5,6 +5,10 @@
 button {
     float: right;
 }
- textarea {
+ textarea, #preview {
      width: 100%;
  }
+
+ p{
+    word-wrap: break-word;
+}
