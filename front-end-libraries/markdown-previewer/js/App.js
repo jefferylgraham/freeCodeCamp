@@ -3,32 +3,47 @@ const Header = props => {
 };
 
 const Button = props => {
-  return <button>{props.children}</button>;
+  return <button onClick={props.onClick}>{props.children}</button>;
 };
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeDiv: null
+      activeDiv: null,
+      editorActive: false,
+      previewActive: false,
+      editorInput: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   handleChange(event) {
     this.setState({
       editorInput: event.target.value
     });
   }
+
+  handleClick(divName) {
+    this.setState({
+      activeDiv: divName
+    });
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div id="editor-component" className="col-7">
+          <div
+            id="editor-component"
+            className={this.state.editorActive ? "col-12" : "col-7"}
+          >
             <Header>
               Editor
-              <Button>
+              <Button onClick={() => this.handleClick("editor-component")}>
                 <i
                   className={
-                    this.state.activeDiv === "editor-component"
+                    this.state.editorActive
                       ? "fa fa-window-minimize"
                       : "fa fa-window-maximize"
                   }
@@ -39,13 +54,16 @@ class App extends React.Component {
           </div>
         </div>
         <div className="row justify-content-center">
-          <div id="preview-component" className="col-9">
+          <div
+            id="preview-component"
+            className={this.state.previewActive ? "col-12" : "col-9"}
+          >
             <Header>
               Preview
               <Button>
                 <i
                   className={
-                    this.state.activeDiv === "preview-component"
+                    this.state.previewActive
                       ? "fa fa-window-minimize"
                       : "fa fa-window-maximize"
                   }
