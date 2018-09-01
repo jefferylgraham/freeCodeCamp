@@ -56,7 +56,11 @@ class App extends React.Component {
                   />
                 </Button>
               </Header>
-              <textarea id="editor" onChange={this.handleChange} />
+              <textarea
+                id="editor"
+                value={this.state.editorInput}
+                onChange={this.handleChange}
+              />
             </div>
           )}
         </div>
