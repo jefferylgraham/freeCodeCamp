@@ -9,9 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorInput: "",
-      editorActive: false,
-      previewActive: false
+      activeDiv: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -30,7 +28,7 @@ class App extends React.Component {
               <Button>
                 <i
                   className={
-                    this.state.editorActive
+                    this.state.activeDiv === "editor-component"
                       ? "fa fa-window-minimize"
                       : "fa fa-window-maximize"
                   }
@@ -47,7 +45,7 @@ class App extends React.Component {
               <Button>
                 <i
                   className={
-                    this.state.previewActive
+                    this.state.activeDiv === "preview-component"
                       ? "fa fa-window-minimize"
                       : "fa fa-window-maximize"
                   }
