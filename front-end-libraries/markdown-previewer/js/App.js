@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeDiv: null,
       editorActive: false,
       previewActive: false,
       editorInput: ""
@@ -25,53 +24,63 @@ class App extends React.Component {
   }
 
   handleClick(divName) {
-    this.setState({
-      activeDiv: divName
-    });
+    if (divName === "editor-component") {
+      this.setState({
+        editorActive: !this.state.editorActive
+      });
+    } else {
+      this.setState({
+        previewActive: !this.state.previewActive
+      });
+    }
   }
 
   render() {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div
-            id="editor-component"
-            className={this.state.editorActive ? "col-12" : "col-7"}
-          >
-            <Header>
-              Editor
-              <Button onClick={() => this.handleClick("editor-component")}>
-                <i
-                  className={
-                    this.state.editorActive
-                      ? "fa fa-window-minimize"
-                      : "fa fa-window-maximize"
-                  }
-                />
-              </Button>
-            </Header>
-            <textarea id="editor" onChange={this.handleChange} />
-          </div>
+          {this.state.previewActive ? null : (
+            <div
+              id="editor-component"
+              className={this.state.editorActive ? "col-12" : "col-7"}
+            >
+              <Header>
+                Editor
+                <Button onClick={() => this.handleClick("editor-component")}>
+                  <i
+                    className={
+                      this.state.editorActive
+                        ? "fa fa-window-minimize"
+                        : "fa fa-window-maximize"
+                    }
+                  />
+                </Button>
+              </Header>
+              <textarea id="editor" onChange={this.handleChange} />
+            </div>
+          )}
         </div>
         <div className="row justify-content-center">
-          <div
-            id="preview-component"
-            className={this.state.previewActive ? "col-12" : "col-9"}
-          >
-            <Header>
-              Preview
-              <Button>
-                <i
-                  className={
-                    this.state.previewActive
-                      ? "fa fa-window-minimize"
-                      : "fa fa-window-maximize"
-                  }
-                />
-              </Button>
-            </Header>
-            <p id="preview">{this.state.editorInput}</p>
-          </div>
+          {this.state.editorActive ? null : (
+            <div
+              id="preview-component"
+              className={this.state.previewActive ? "col-12" : "col-9"}
+            >
+              <Header>
+                Preview
+                <Button onClick={() => this.handleClick("preview-component")}>
+                  <i
+                    className={
+                      this.state.previewActive
+                        ? "fa fa-window-minimize"
+                        : "fa fa-window-maximize"
+                    }
+                  />
+                </Button>
+              </Header>
+              <p id="preview">{this.state.editorInput}</p>
+            </div>
+          )}
         </div>
       </div>
     );
