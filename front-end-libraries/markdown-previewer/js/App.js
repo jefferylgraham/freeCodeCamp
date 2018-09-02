@@ -1,3 +1,32 @@
+const defaultText = `# Welcome to my React Markdown Previewer!
+
+## This is a sub-heading...
+
+There's also [links](https://www.freecodecamp.com)
+
+> Block Quotes!
+
+Inline \`code\` has \`back-ticks around\` it.
+
+\`\`\`
+// this is multi-line code:
+
+function anotherExample(firstLine, lastLine) {
+  if (firstLine == "\`\`\`" && lastLine == "\`\`\`") {
+    return multiLineCode;
+  }
+}
+\`\`\`
+
+You can also make text **bold**
+
+- And of course there are lists.
+  - Some are bulleted.
+     - With different indentation levels.
+        - That look like this.
+
+![React Logo w/ Text](https://goo.gl/Umyytc)`;
+
 const Header = props => {
   return <header>{props.children}</header>;
 };
@@ -12,7 +41,7 @@ class App extends React.Component {
     this.state = {
       editorActive: false,
       previewActive: false,
-      editorInput: ""
+      editorInput: defaultText
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
