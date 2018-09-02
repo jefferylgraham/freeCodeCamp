@@ -82,7 +82,12 @@ class App extends React.Component {
                   />
                 </Button>
               </Header>
-              <p id="preview">{this.state.editorInput}</p>
+              <div
+                id="preview"
+                dangerouslySetInnerHTML={{
+                  __html: marked(this.state.editorInput)
+                }}
+              />
             </div>
           )}
         </div>
