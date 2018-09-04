@@ -2,6 +2,13 @@ marked.setOptions({
   breaks: true
 });
 
+const renderer = new marked.Renderer();
+const linkRenderer = renderer.link;
+renderer.link = (href, title, text) => {
+    const html = linkRenderer.call(renderer, href, title, text);
+    return html.replace(/^<a /, '<a target="_blank" rel="nofollow" ');
+};
+
 const defaultText = `# Welcome to my React Markdown Previewer!
 
 ## This is a sub-heading...
@@ -118,7 +125,7 @@ class App extends React.Component {
               <div
                 id="preview"
                 dangerouslySetInnerHTML={{
-                  __html: marked(this.state.editorInput)
+                  __html: marked(this.state.editorInput, { renderer })
                 }}
               />
             </div>
