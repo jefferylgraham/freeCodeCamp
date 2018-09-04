@@ -1,3 +1,7 @@
+marked.setOptions({
+  breaks: true
+});
+
 const defaultText = `# Welcome to my React Markdown Previewer!
 
 ## This is a sub-heading...
