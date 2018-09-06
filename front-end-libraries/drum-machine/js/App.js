@@ -28,18 +28,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       display: "Display",
-      sounds: [{ Q: "boom" }]
+      //array of objects tying keyboard keys to sounds
+      sounds: [
+        { Q: "boom" },
+        { W: "clap" },
+        { E: "hihat" },
+        { A: "kick" },
+        { S: "openhat" },
+        { D: "ride" },
+        { Z: "snare" },
+        { X: "tink" },
+        { C: "tom" }
+      ]
     };
     this.playSound = this.playSound.bind(this);
   }
 
-  playSound(index, audioID) {
-    var displaying = this.state.sounds[index][audioID];
-    this.setState({
-      display: displaying.toUpperCase()
-    });
-    var x = document.getElementById(audioID);
-    x.play();
+  playSound() {
+    console.log("clicked");
+    // var displaying = this.state.sounds[index][audioID];
+    // this.setState({
+    //   display: displaying.toUpperCase()
+    // });
+    // var x = document.getElementById(audioID);
+    // x.play();
   }
 
   render() {
@@ -49,20 +61,17 @@ class App extends React.Component {
           <div id="drum-machine">
             <Display display={this.state.display} />
             <div id="pads">
-              <DrumPad
-                id={Object.keys(this.state.sounds[0])[0]}
-                onClick={() =>
-                  this.playSound(0, Object.keys(this.state.sounds[0])[0])
-                }
-                soundID={
-                  this.state.sounds[0][Object.keys(this.state.sounds[0])[0]]
-                }
-                soundSrc={
-                  "sounds/" +
-                  this.state.sounds[0][Object.keys(this.state.sounds[0])[0]] +
-                  ".wav"
-                }
-              />
+              {this.state.sounds.map(function(sound, index) {
+                return (
+                  <DrumPad
+                    key={index}
+                    id={Object.keys(sound)[0]}
+                    // onClick={() => this.playSound()}
+                    soundID={sound[Object.keys(sound)[0]]}
+                    soundSrc={"sounds/" + sound[Object.keys(sound)[0]] + ".wav"}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
