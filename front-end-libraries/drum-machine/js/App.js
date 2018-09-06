@@ -27,15 +27,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: "displayinf",
+      display: "Display",
       sounds: [{ Q: "boom" }]
     };
     this.playSound = this.playSound.bind(this);
   }
 
-  playSound(audioID) {
+  playSound(index, audioID) {
+    var displaying = this.state.sounds[index][audioID];
     this.setState({
-      display: "boom"
+      display: displaying.toUpperCase()
     });
     var x = document.getElementById(audioID);
     x.play();
@@ -51,7 +52,7 @@ class App extends React.Component {
               <DrumPad
                 id={Object.keys(this.state.sounds[0])[0]}
                 onClick={() =>
-                  this.playSound(Object.keys(this.state.sounds[0])[0])
+                  this.playSound(0, Object.keys(this.state.sounds[0])[0])
                 }
                 soundID={
                   this.state.sounds[0][Object.keys(this.state.sounds[0])[0]]
