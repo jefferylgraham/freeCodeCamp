@@ -1,3 +1,4 @@
+//Display component retrieved from display state
 class Display extends React.Component {
   render() {
     return (
@@ -8,12 +9,13 @@ class Display extends React.Component {
   }
 }
 
+//Drum pad components
 class DrumPad extends React.Component {
   render() {
     return (
       <div
-        onClick={this.props.onClick}
         id={this.props.soundID}
+        onClick={this.props.onClick}
         className="drum-pad"
       >
         <audio id={this.props.id} className="clip" src={this.props.soundSrc} />
@@ -44,14 +46,14 @@ class App extends React.Component {
     this.playSound = this.playSound.bind(this);
   }
 
-  playSound() {
-    console.log("clicked");
-    // var displaying = this.state.sounds[index][audioID];
-    // this.setState({
-    //   display: displaying.toUpperCase()
-    // });
-    // var x = document.getElementById(audioID);
-    // x.play();
+  //play sound depending on what object from this.state.sounds is clicked
+  playSound(index, audioID) {
+    var displaying = this.state.sounds[index][audioID];
+    this.setState({
+      display: displaying.toUpperCase()
+    });
+    var x = document.getElementById(audioID);
+    x.play();
   }
 
   render() {
@@ -61,12 +63,13 @@ class App extends React.Component {
           <div id="drum-machine">
             <Display display={this.state.display} />
             <div id="pads">
-              {this.state.sounds.map(function(sound, index) {
+              {/* Iterate through this.state.sounds to build drum pads */}
+              {this.state.sounds.map((sound, index) => {
                 return (
                   <DrumPad
                     key={index}
                     id={Object.keys(sound)[0]}
-                    // onClick={() => this.playSound()}
+                    onClick={() => this.playSound(index, Object.keys(sound)[0])}
                     soundID={sound[Object.keys(sound)[0]]}
                     soundSrc={"sounds/" + sound[Object.keys(sound)[0]] + ".wav"}
                   />
