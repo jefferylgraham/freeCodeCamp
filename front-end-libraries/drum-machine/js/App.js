@@ -1,10 +1,42 @@
+class Display extends React.Component {
+  render() {
+    return (
+      <div id="display">
+        <p>{this.props.display}</p>
+      </div>
+    );
+  }
+}
+
+class DrumPad extends React.Component {
+  render() {
+    return (
+      <div
+        onClick={this.props.onClick}
+        id={this.props.soundID}
+        className="drum-pad"
+      >
+        <audio id={this.props.id} className="clip" src={this.props.soundSrc} />
+        {this.props.id}
+      </div>
+    );
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      display: "displayinf",
+      sounds: [{ Q: "boom" }]
+    };
     this.playSound = this.playSound.bind(this);
   }
 
   playSound(audioID) {
+    this.setState({
+      display: "boom"
+    });
     var x = document.getElementById(audioID);
     x.play();
   }
@@ -14,73 +46,22 @@ class App extends React.Component {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div id="drum-machine">
-            <div id="display">
-              <p>display</p>
-            </div>
+            <Display display={this.state.display} />
             <div id="pads">
-              <div
-                onClick={() => this.playSound("Q")}
-                id="boom"
-                className="clip drum-pad"
-              >
-                <audio id="Q" className="clip" src="sounds/boom.wav" />Q
-              </div>
-              <div
-                onClick={() => this.playSound("W")}
-                id="clap"
-                className="clip drum-pad"
-              >
-                <audio id="W" className="clip" src="sounds/clap.wav" />W
-              </div>
-              <div
-                onClick={() => this.playSound("E")}
-                id="hihat"
-                className="clip drum-pad"
-              >
-                <audio id="E" className="clip" src="sounds/hihat.wav" />E
-              </div>
-              <div
-                onClick={() => this.playSound("A")}
-                id="kick"
-                className="clip drum-pad"
-              >
-                <audio id="A" className="clip" src="sounds/kick.wav" />A
-              </div>
-              <div
-                onClick={() => this.playSound("S")}
-                id="openhat"
-                className="clip drum-pad"
-              >
-                <audio id="S" className="clip" src="sounds/openhat.wav" />S
-              </div>
-              <div
-                onClick={() => this.playSound("D")}
-                id="ride"
-                className="clip drum-pad"
-              >
-                <audio id="D" className="clip" src="sounds/ride.wav" />D
-              </div>
-              <div
-                onClick={() => this.playSound("Z")}
-                id="snare"
-                className="clip drum-pad"
-              >
-                <audio id="Z" className="clip" src="sounds/snare.wav" />Z
-              </div>
-              <div
-                onClick={() => this.playSound("X")}
-                id="tink"
-                className="clip drum-pad"
-              >
-                <audio id="X" className="clip" src="sounds/tink.wav" />X
-              </div>
-              <div
-                onClick={() => this.playSound("C")}
-                id="tom"
-                className="clip drum-pad"
-              >
-                <audio id="C" className="clip" src="sounds/tom.wav" />C
-              </div>
+              <DrumPad
+                id={Object.keys(this.state.sounds[0])[0]}
+                onClick={() =>
+                  this.playSound(Object.keys(this.state.sounds[0])[0])
+                }
+                soundID={
+                  this.state.sounds[0][Object.keys(this.state.sounds[0])[0]]
+                }
+                soundSrc={
+                  "sounds/" +
+                  this.state.sounds[0][Object.keys(this.state.sounds[0])[0]] +
+                  ".wav"
+                }
+              />
             </div>
           </div>
         </div>
