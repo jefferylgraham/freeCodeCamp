@@ -2,8 +2,8 @@
 class Display extends React.Component {
   render() {
     return (
-      <div id="display">
-        <p>{this.props.display}</p>
+      <div>
+        <p id="display">{this.props.display}</p>
       </div>
     );
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
   clickSound(index, audioID) {
     var displaying = this.state.sounds[index][audioID];
     this.setState({
-      display: displaying.toUpperCase()
+      display: displaying
     });
     var x = document.getElementById(audioID);
     x.play();
@@ -71,21 +71,20 @@ class App extends React.Component {
   //play sound depending on what key is pressed
   pressSound(event) {
     var audioID = event.keyCode;
-    console.log(audioID);
     var displaying = this.state.keyCodes[audioID];
     this.setState({
-      display: displaying.toUpperCase()
+      display: displaying
     });
     var x = document.getElementById(String.fromCharCode(audioID));
     x.play();
   }
 
   componentWillMount() {
-    document.addEventListener("keydown", this.pressSound.bind(this));
+    window.addEventListener("keydown", this.pressSound.bind(this));
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.pressSound.bind(this));
+    window.removeEventListener("keydown", this.pressSound.bind(this));
   }
 
   render() {
@@ -109,7 +108,11 @@ class App extends React.Component {
                       this.clickSound(index, Object.keys(sound)[0])
                     }
                     soundID={sound[Object.keys(sound)[0]]}
-                    soundSrc={"sounds/" + sound[Object.keys(sound)[0]] + ".wav"}
+                    soundSrc={
+                      "https://github.com/jefferylgraham/drum-machine/blob/master/sounds/" +
+                      sound[Object.keys(sound)[0]] +
+                      ".wav?raw=true"
+                    }
                   />
                 );
               })}
