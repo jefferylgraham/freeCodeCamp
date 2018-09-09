@@ -2,14 +2,29 @@
     border: 1px solid orange;
 }
 
+@font-face{
+    font-family:'digital';
+    src: url('../fonts/digital-7.ttf');
+}
+
+#output {
+    text-align: right;
+}
+
+#display {
+    text-align: right;
+    font-family: digital;
+    font-size: 29px;
+}
+
 #buttons {
     display: grid;
     grid-template: 
-        'clear clear clear divide'
-        'seven eight nine multiply'
-        'four five six subtract'
-        'one two three add'
-        'zero zero decimal equals'
+        'clear clear clear divide' 40px
+        'seven eight nine multiply' 40px
+        'four five six subtract' 40px
+        'one two three add' 40px
+        'zero zero decimal equals' 40px
 }
 
 #clear {
