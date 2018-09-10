@@ -67,11 +67,11 @@ class Calculator extends React.Component {
     };
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
-    this.clearDisplay = this.clearDisplay.bind(this);
-    this.calculate = this.calculate.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+    this.handleEquals = this.handleEquals.bind(this);
   }
 
-  clearDisplay() {
+  handleClear() {
     this.setState({
       output: "",
       display: 0
@@ -86,6 +86,8 @@ class Calculator extends React.Component {
         output: "0" + e.target.value,
         display: e.target.value
       });
+    } else if (e.target.value == "." && this.state.output.indexOf(".") > 0) {
+      console.log("Already have a decimal");
     } else {
       this.setState({
         output: (this.state.output += e.target.value),
@@ -101,7 +103,7 @@ class Calculator extends React.Component {
     });
   }
 
-  calculate(e) {
+  handleEquals(e) {
     this.setState({
       output: (this.state.output += e.target.value)
     });
@@ -118,8 +120,8 @@ class Calculator extends React.Component {
               <Buttons
                 numbers={this.handleNumbers}
                 functions={this.handleFunctions}
-                clear={this.clearDisplay}
-                equals={this.calculate}
+                clear={this.handleClear}
+                equals={this.handleEquals}
               />
             </div>
           </div>
