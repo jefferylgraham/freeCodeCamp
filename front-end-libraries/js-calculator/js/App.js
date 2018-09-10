@@ -2,7 +2,7 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      output: "test",
+      output: "",
       display: 0
     };
     this.numberClick = this.numberClick.bind(this);
@@ -29,20 +29,47 @@ class Calculator extends React.Component {
                 <button id="one" value="1" onClick={this.numberClick}>
                   1
                 </button>
-                <button id="two">2</button>
-                <button id="three">3</button>
-                <button id="four">4</button>
-                <button id="five">5</button>
-                <button id="six">6</button>
-                <button id="seven">7</button>
-                <button id="eight">8</button>
-                <button id="nine">9</button>
+                <button id="two" value="2" onClick={this.numberClick}>
+                  2
+                </button>
+                <button id="three" value="3" onClick={this.numberClick}>
+                  3
+                </button>
+                <button id="four" value="4" onClick={this.numberClick}>
+                  4
+                </button>
+                <button id="five" value="5" onClick={this.numberClick}>
+                  5
+                </button>
+                <button id="six" value="6" onClick={this.numberClick}>
+                  6
+                </button>
+                <button id="seven" value="7" onClick={this.numberClick}>
+                  7
+                </button>
+                <button id="eight" value="8" onClick={this.numberClick}>
+                  8
+                </button>
+                <button id="nine" value="9" onClick={this.numberClick}>
+                  9
+                </button>
                 <button id="clear">AC</button>
-                <button id="divide">/</button>
-                <button id="multiply">*</button>
-                <button id="add">+</button>
-                <button id="subtract">-</button>
-                <button id="equals"> = </button>
+                <button id="divide" value="/">
+                  /
+                </button>
+                <button id="multiply" value="*">
+                  *
+                </button>
+                <button id="add" value="+">
+                  +
+                </button>
+                <button id="subtract" value="-">
+                  -
+                </button>
+                <button id="equals" value="=">
+                  {" "}
+                  ={" "}
+                </button>
               </div>
             </div>
           </div>
