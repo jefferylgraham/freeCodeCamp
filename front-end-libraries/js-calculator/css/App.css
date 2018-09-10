@@ -9,6 +9,8 @@
 
 #output {
     text-align: right;
+    min-height: 20px;
+    font-family: digital;
 }
 
 #display {
