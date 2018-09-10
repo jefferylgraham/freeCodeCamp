@@ -50,7 +50,7 @@ class Buttons extends React.Component {
         <button id="subtract" value="-" onClick={this.props.functions}>
           -
         </button>
-        <button id="equals" value="=">
+        <button id="equals" value="=" onClick={this.props.equals}>
           =
         </button>
       </div>
@@ -68,6 +68,7 @@ class Calculator extends React.Component {
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
+    this.calculate = this.calculate.bind(this);
   }
 
   clearDisplay() {
@@ -78,16 +79,26 @@ class Calculator extends React.Component {
   }
 
   handleNumbers(e) {
-    this.setState({
-      output: (this.state.output += e.target.value),
-      display: e.target.value
-    });
+    if (e.target.value == 0 && this.state.output == "") {
+      console.log("zero cant start.");
+    } else {
+      this.setState({
+        output: (this.state.output += e.target.value),
+        display: e.target.value
+      });
+    }
   }
 
   handleFunctions(e) {
     this.setState({
       output: (this.state.output += e.target.value),
       display: e.target.value
+    });
+  }
+
+  calculate(e) {
+    this.setState({
+      output: (this.state.output += e.target.value)
     });
   }
 
@@ -103,6 +114,7 @@ class Calculator extends React.Component {
                 numbers={this.handleNumbers}
                 functions={this.handleFunctions}
                 clear={this.clearDisplay}
+                equals={this.calculate}
               />
             </div>
           </div>
