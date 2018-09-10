@@ -81,6 +81,11 @@ class Calculator extends React.Component {
   handleNumbers(e) {
     if (e.target.value == 0 && this.state.output == "") {
       console.log("zero cant start.");
+    } else if (e.target.value == "." && this.state.output == "") {
+      this.setState({
+        output: "0" + e.target.value,
+        display: e.target.value
+      });
     } else {
       this.setState({
         output: (this.state.output += e.target.value),
