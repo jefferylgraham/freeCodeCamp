@@ -2,55 +2,135 @@ class Buttons extends React.Component {
   render() {
     return (
       <div id="buttons">
-        <button id="decimal" value="." onClick={this.props.numbers}>
+        <button
+          id="decimal"
+          className="numbers"
+          value="."
+          onClick={this.props.numbers}
+        >
           .
         </button>
-        <button id="zero" value="0" onClick={this.props.numbers}>
+        <button
+          id="zero"
+          className="numbers"
+          value="0"
+          onClick={this.props.numbers}
+        >
           0
         </button>
-        <button id="one" value="1" onClick={this.props.numbers}>
+        <button
+          id="one"
+          className="numbers"
+          value="1"
+          onClick={this.props.numbers}
+        >
           1
         </button>
-        <button id="two" value="2" onClick={this.props.numbers}>
+        <button
+          id="two"
+          className="numbers"
+          value="2"
+          onClick={this.props.numbers}
+        >
           2
         </button>
-        <button id="three" value="3" onClick={this.props.numbers}>
+        <button
+          id="three"
+          className="numbers"
+          value="3"
+          onClick={this.props.numbers}
+        >
           3
         </button>
-        <button id="four" value="4" onClick={this.props.numbers}>
+        <button
+          id="four"
+          className="numbers"
+          value="4"
+          onClick={this.props.numbers}
+        >
           4
         </button>
-        <button id="five" value="5" onClick={this.props.numbers}>
+        <button
+          id="five"
+          className="numbers"
+          value="5"
+          onClick={this.props.numbers}
+        >
           5
         </button>
-        <button id="six" value="6" onClick={this.props.numbers}>
+        <button
+          id="six"
+          className="numbers"
+          value="6"
+          onClick={this.props.numbers}
+        >
           6
         </button>
-        <button id="seven" value="7" onClick={this.props.numbers}>
+        <button
+          id="seven"
+          className="numbers"
+          value="7"
+          onClick={this.props.numbers}
+        >
           7
         </button>
-        <button id="eight" value="8" onClick={this.props.numbers}>
+        <button
+          id="eight"
+          className="numbers"
+          value="8"
+          onClick={this.props.numbers}
+        >
           8
         </button>
-        <button id="nine" value="9" onClick={this.props.numbers}>
+        <button
+          id="nine"
+          className="numbers"
+          value="9"
+          onClick={this.props.numbers}
+        >
           9
         </button>
         <button id="clear" onClick={this.props.clear}>
           AC
         </button>
-        <button id="divide" value="/" onClick={this.props.functions}>
+        <button
+          id="divide"
+          className="functions"
+          value="/"
+          onClick={this.props.functions}
+        >
           /
         </button>
-        <button id="multiply" value="*" onClick={this.props.functions}>
+        <button
+          id="multiply"
+          className="functions"
+          value="*"
+          onClick={this.props.functions}
+        >
           *
         </button>
-        <button id="add" value="+" onClick={this.props.functions}>
+        <button
+          id="add"
+          className="functions"
+          value="+"
+          onClick={this.props.functions}
+        >
           +
         </button>
-        <button id="subtract" value="-" onClick={this.props.functions}>
+        <button
+          id="subtract"
+          className="functions"
+          value="-"
+          onClick={this.props.functions}
+        >
           -
         </button>
-        <button id="equals" value="=" onClick={this.props.equals}>
+        <button
+          id="equals"
+          className="functions"
+          value="="
+          onClick={this.props.equals}
+        >
           =
         </button>
       </div>
@@ -113,17 +193,17 @@ class Calculator extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div className="col-6">
-            <div id="calculator">
+          <div id="calculator">
+            <div id="upper">
               <div id="output">{this.state.output}</div>
               <div id="display">{this.state.display}</div>
-              <Buttons
-                numbers={this.handleNumbers}
-                functions={this.handleFunctions}
-                clear={this.handleClear}
-                equals={this.handleEquals}
-              />
             </div>
+            <Buttons
+              numbers={this.handleNumbers}
+              functions={this.handleFunctions}
+              clear={this.handleClear}
+              equals={this.handleEquals}
+            />
           </div>
         </div>
       </div>

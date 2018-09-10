@@ -1,5 +1,8 @@
-* {
-    border: 1px solid orange;
+body {
+    display: grid;
+    height: 100vh;
+    margin: 0;
+    align-items: center;
 }
 
 @font-face{
@@ -7,17 +10,46 @@
     src: url('../fonts/digital-7.ttf');
 }
 
+button {
+    color: white;
+}
+
+button:hover {
+    color: black;
+    border: 1px solid gray;
+}
+
+#calculator {
+	border: 1px solid gray;
+	padding: 30px 20px;
+	background-color: rgb(27, 44, 66);
+    border-radius: 10px;
+    width:200px;
+}
+
+#upper {
+	margin-bottom: 10px;
+	background-color: silver;
+	padding: 5px;
+	border-radius: 5px;
+}
+
 #output {
-    text-align: right;
     min-height: 26px;
-    font-family: digital;
 }
 
 #display {
-    text-align: right;
-    font-family: digital;
     font-size: 29px;
 }
+
+#display, #output {
+	text-align: right;
+	font-family: digital;
+	background-color: black;
+    color: white;
+    padding: 0 10px;
+}
+
 
 #buttons {
     display: grid;
@@ -30,7 +62,8 @@
 }
 
 #clear {
-    grid-area: clear;
+	grid-area: clear;
+	background-color: maroon;
 }
 
 #divide {
@@ -94,5 +127,13 @@
 }
 
 #equals {
-    grid-area: equals;
+	grid-area: equals;
+}
+
+.numbers {
+    background-color: gray;
+}
+
+.functions {
+    background-color: rgb(53, 74, 102);
 }
