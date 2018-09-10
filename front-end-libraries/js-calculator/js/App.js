@@ -6,6 +6,14 @@ class Calculator extends React.Component {
       display: 0
     };
     this.numberClick = this.numberClick.bind(this);
+    this.clearDisplay = this.clearDisplay.bind(this);
+  }
+
+  clearDisplay() {
+    this.setState({
+      output: "",
+      display: 0
+    });
   }
 
   numberClick(e) {
@@ -53,7 +61,9 @@ class Calculator extends React.Component {
                 <button id="nine" value="9" onClick={this.numberClick}>
                   9
                 </button>
-                <button id="clear">AC</button>
+                <button id="clear" onClick={this.clearDisplay}>
+                  AC
+                </button>
                 <button id="divide" value="/">
                   /
                 </button>
