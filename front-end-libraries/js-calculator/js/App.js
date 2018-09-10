@@ -2,9 +2,17 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 0,
-      output: "test"
+      output: "test",
+      display: 0
     };
+    this.numberClick = this.numberClick.bind(this);
+  }
+
+  numberClick(e) {
+    this.setState({
+      output: (this.state.output += e.target.value),
+      display: e.target.value
+    });
   }
 
   render() {
@@ -18,7 +26,9 @@ class Calculator extends React.Component {
               <div id="buttons">
                 <button id="decimal">.</button>
                 <button id="zero">0</button>
-                <button id="one">1</button>
+                <button id="one" value="1" onClick={this.numberClick}>
+                  1
+                </button>
                 <button id="two">2</button>
                 <button id="three">3</button>
                 <button id="four">4</button>
