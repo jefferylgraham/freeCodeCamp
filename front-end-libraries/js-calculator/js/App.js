@@ -6,7 +6,9 @@ class Buttons extends React.Component {
           id="decimal"
           className="numbers"
           value="."
-          onClick={this.props.numbers}
+          onClick={
+            this.props.currentNumber % 1 == 0 ? this.props.numbers : null
+          }
         >
           .
         </button>
@@ -14,7 +16,7 @@ class Buttons extends React.Component {
           id="zero"
           className="numbers"
           value="0"
-          onClick={this.props.numbers}
+          onClick={this.props.currentNumber == 0 ? null : this.props.numbers}
         >
           0
         </button>
@@ -143,7 +145,8 @@ class Calculator extends React.Component {
     super(props);
     this.state = {
       output: "",
-      display: 0
+      display: 0,
+      currentNumber: 0
     };
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
@@ -154,33 +157,35 @@ class Calculator extends React.Component {
   handleClear() {
     this.setState({
       output: "",
-      display: 0
+      display: 0,
+      currentNumber: 0
     });
   }
 
   handleNumbers(e) {
-    if (e.target.value == 0 && this.state.output == "") {
-      console.log("zero cant start.");
-    } else if (e.target.value == "." && this.state.output == "") {
+    if (e.target.value == "." && this.state.currentNumber == 0) {
       this.setState({
         output: "0" + e.target.value,
-        display: e.target.value
+        display: e.target.value,
+        currentNumber: Number(this.state.output)
       });
-    } else if (e.target.value == "." && this.state.output.indexOf(".") > 0) {
-      console.log("Already have a decimal");
     } else {
       this.setState({
         output: (this.state.output += e.target.value),
-        display: e.target.value
+        display: e.target.value,
+        currentNumber: Number(this.state.output)
       });
     }
+    console.log(this.state.currentNumber);
   }
 
   handleFunctions(e) {
     this.setState({
       output: (this.state.output += e.target.value),
-      display: e.target.value
+      display: e.target.value,
+      currentNumber: 0
     });
+    console.log(this.state.currentNumber);
   }
 
   handleEquals(e) {
@@ -199,6 +204,7 @@ class Calculator extends React.Component {
               <div id="display">{this.state.display}</div>
             </div>
             <Buttons
+              currentNumber={this.state.currentNumber}
               numbers={this.handleNumbers}
               functions={this.handleFunctions}
               clear={this.handleClear}
