@@ -7,7 +7,9 @@ class Buttons extends React.Component {
           className="numbers"
           value="."
           onClick={
-            this.props.currentNumber % 1 == 0 ? this.props.numbers : null
+            Number(this.props.currentNumber) % 1 == 0
+              ? this.props.numbers
+              : null
           }
         >
           .
@@ -16,7 +18,9 @@ class Buttons extends React.Component {
           id="zero"
           className="numbers"
           value="0"
-          onClick={this.props.currentNumber == 0 ? null : this.props.numbers}
+          onClick={
+            Number(this.props.currentNumber) == 0 ? null : this.props.numbers
+          }
         >
           0
         </button>
@@ -146,7 +150,7 @@ class Calculator extends React.Component {
     this.state = {
       output: "",
       display: 0,
-      currentNumber: 0
+      currentNumber: ""
     };
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
@@ -158,32 +162,31 @@ class Calculator extends React.Component {
     this.setState({
       output: "",
       display: 0,
-      currentNumber: 0
+      currentNumber: ""
     });
   }
 
   handleNumbers(e) {
-    if (e.target.value == "." && this.state.currentNumber == 0) {
+    if (e.target.value == "." && this.state.currentNumber == "") {
       this.setState({
-        output: "0" + e.target.value,
+        output: this.state.output + "0" + e.target.value,
         display: e.target.value,
-        currentNumber: Number(this.state.output)
+        currentNumber: (this.state.currentNumber += e.target.value)
       });
     } else {
       this.setState({
         output: (this.state.output += e.target.value),
         display: e.target.value,
-        currentNumber: Number(this.state.output)
+        currentNumber: (this.state.currentNumber += e.target.value)
       });
     }
-    console.log(this.state.currentNumber);
   }
 
   handleFunctions(e) {
     this.setState({
       output: (this.state.output += e.target.value),
       display: e.target.value,
-      currentNumber: 0
+      currentNumber: ""
     });
     console.log(this.state.currentNumber);
   }
