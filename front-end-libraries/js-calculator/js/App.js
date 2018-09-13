@@ -201,12 +201,13 @@ class Calculator extends React.Component {
   }
 
   handleFunctions(e) {
-    this.setState({
-      output: (this.state.output += e.target.value),
-      display: e.target.value,
-      currentNumber: ""
-    });
-    console.log(e.target.value);
+    if (!OPERATORS.includes(this.state.display)) {
+      this.setState({
+        output: (this.state.output += e.target.value),
+        display: e.target.value,
+        currentNumber: ""
+      });
+    }
   }
 
   handleEquals(e) {
