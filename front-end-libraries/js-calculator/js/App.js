@@ -1,3 +1,5 @@
+const OPERATORS = ["+", "-", "*", "/"];
+
 class Buttons extends React.Component {
   render() {
     return (
@@ -149,7 +151,7 @@ class Calculator extends React.Component {
     super(props);
     this.state = {
       output: "",
-      display: 0,
+      display: "",
       currentNumber: ""
     };
     this.handleNumbers = this.handleNumbers.bind(this);
@@ -161,24 +163,40 @@ class Calculator extends React.Component {
   handleClear() {
     this.setState({
       output: "",
-      display: 0,
+      display: "",
       currentNumber: ""
     });
   }
 
   handleNumbers(e) {
-    if (e.target.value == "." && this.state.currentNumber == "") {
-      this.setState({
-        output: this.state.output + "0" + e.target.value,
-        display: e.target.value,
-        currentNumber: (this.state.currentNumber += e.target.value)
-      });
+    if (OPERATORS.includes(this.state.display)) {
+      if (e.target.value == "." && this.state.currentNumber == "") {
+        this.setState({
+          output: this.state.output + "0" + e.target.value,
+          display: "" + e.target.value,
+          currentNumber: (this.state.currentNumber += e.target.value)
+        });
+      } else {
+        this.setState({
+          output: (this.state.output += e.target.value),
+          display: "" + e.target.value,
+          currentNumber: (this.state.currentNumber += e.target.value)
+        });
+      }
     } else {
-      this.setState({
-        output: (this.state.output += e.target.value),
-        display: e.target.value,
-        currentNumber: (this.state.currentNumber += e.target.value)
-      });
+      if (e.target.value == "." && this.state.currentNumber == "") {
+        this.setState({
+          output: this.state.output + "0" + e.target.value,
+          display: (this.state.display += e.target.value),
+          currentNumber: (this.state.currentNumber += e.target.value)
+        });
+      } else {
+        this.setState({
+          output: (this.state.output += e.target.value),
+          display: (this.state.display += e.target.value),
+          currentNumber: (this.state.currentNumber += e.target.value)
+        });
+      }
     }
   }
 
@@ -188,7 +206,7 @@ class Calculator extends React.Component {
       display: e.target.value,
       currentNumber: ""
     });
-    console.log(this.state.currentNumber);
+    console.log(e.target.value);
   }
 
   handleEquals(e) {
@@ -204,7 +222,9 @@ class Calculator extends React.Component {
           <div id="calculator">
             <div id="upper">
               <div id="output">{this.state.output}</div>
-              <div id="display">{this.state.display}</div>
+              <div id="display">
+                {this.state.display == "" ? 0 : this.state.display}
+              </div>
             </div>
             <Buttons
               currentNumber={this.state.currentNumber}

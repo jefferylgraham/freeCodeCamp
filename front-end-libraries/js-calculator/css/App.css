@@ -37,7 +37,7 @@ button:hover {
 #output {
     min-height: 26px;
     overflow-wrap: break-word;
-word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 #display {
