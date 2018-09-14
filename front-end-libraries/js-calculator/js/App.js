@@ -9,9 +9,9 @@ class Buttons extends React.Component {
           className="numbers"
           value="."
           onClick={
-            Number(this.props.currentNumber) % 1 == 0
-              ? this.props.numbers
-              : null
+            this.props.currentNumber.split("").includes(".")
+              ? null
+              : this.props.numbers
           }
         >
           .
@@ -201,9 +201,16 @@ class Calculator extends React.Component {
   }
 
   handleFunctions(e) {
-    if (!OPERATORS.includes(this.state.display)) {
+    var endsWith = this.state.output[this.state.output.length - 1];
+    if (!OPERATORS.includes(endsWith)) {
       this.setState({
-        output: (this.state.output += e.target.value),
+        output: this.state.output + e.target.value,
+        display: e.target.value,
+        currentNumber: ""
+      });
+    } else {
+      this.setState({
+        output: this.state.output.slice(0, -1) + e.target.value,
         display: e.target.value,
         currentNumber: ""
       });
