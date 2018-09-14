@@ -152,7 +152,8 @@ class Calculator extends React.Component {
     this.state = {
       output: "",
       display: "",
-      currentNumber: ""
+      currentNumber: "",
+      calculatorArr: []
     };
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
@@ -164,11 +165,18 @@ class Calculator extends React.Component {
     this.setState({
       output: "",
       display: "",
-      currentNumber: ""
+      currentNumber: "",
+      calculatorArr: []
     });
   }
 
   handleNumbers(e) {
+    var endsWith = this.state.output[this.state.output.length - 1];
+    if (OPERATORS.includes(endsWith)) {
+      this.setState({
+        calculatorArr: [...this.state.calculatorArr, endsWith]
+      });
+    }
     if (OPERATORS.includes(this.state.display)) {
       if (e.target.value == "." && this.state.currentNumber == "") {
         this.setState({
@@ -201,26 +209,38 @@ class Calculator extends React.Component {
   }
 
   handleFunctions(e) {
+    var lastNumber = Number(this.state.currentNumber);
     var endsWith = this.state.output[this.state.output.length - 1];
     if (!OPERATORS.includes(endsWith)) {
       this.setState({
         output: this.state.output + e.target.value,
         display: e.target.value,
-        currentNumber: ""
+        currentNumber: "",
+        calculatorArr: [...this.state.calculatorArr, lastNumber]
       });
     } else {
       this.setState({
         output: this.state.output.slice(0, -1) + e.target.value,
         display: e.target.value,
-        currentNumber: ""
+        currentNumber: "",
+        calculatorArr: [...this.state.calculatorArr, lastNumber]
       });
     }
   }
 
   handleEquals(e) {
-    this.setState({
-      output: (this.state.output += e.target.value)
-    });
+    var lastNumber = Number(this.state.currentNumber);
+    this.setState(
+      {
+        output: (this.state.output += e.target.value),
+        calculatorArr: [...this.state.calculatorArr, lastNumber]
+      },
+      () => this.calculate()
+    );
+  }
+
+  calculate() {
+    console.log(this.state.calculatorArr);
   }
 
   render() {
