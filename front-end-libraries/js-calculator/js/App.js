@@ -240,7 +240,9 @@ class Calculator extends React.Component {
   }
 
   calculate() {
-    this.state.calculatorStr;
+    this.setState({
+      display: eval(this.state.calculatorStr)
+    });
   }
 
   render() {
