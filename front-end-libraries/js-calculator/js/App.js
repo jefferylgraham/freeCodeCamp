@@ -153,7 +153,7 @@ class Calculator extends React.Component {
       output: "",
       display: "",
       currentNumber: "",
-      calculatorArr: []
+      calculatorStr: ""
     };
     this.handleNumbers = this.handleNumbers.bind(this);
     this.handleFunctions = this.handleFunctions.bind(this);
@@ -166,7 +166,7 @@ class Calculator extends React.Component {
       output: "",
       display: "",
       currentNumber: "",
-      calculatorArr: []
+      calculatorStr: ""
     });
   }
 
@@ -174,7 +174,7 @@ class Calculator extends React.Component {
     var endsWith = this.state.output[this.state.output.length - 1];
     if (OPERATORS.includes(endsWith)) {
       this.setState({
-        calculatorArr: [...this.state.calculatorArr, endsWith]
+        calculatorStr: this.state.calculatorStr.concat(endsWith)
       });
     }
     if (OPERATORS.includes(this.state.display)) {
@@ -216,14 +216,14 @@ class Calculator extends React.Component {
         output: this.state.output + e.target.value,
         display: e.target.value,
         currentNumber: "",
-        calculatorArr: [...this.state.calculatorArr, lastNumber]
+        calculatorStr: this.state.calculatorStr.concat(lastNumber)
       });
     } else {
       this.setState({
         output: this.state.output.slice(0, -1) + e.target.value,
         display: e.target.value,
         currentNumber: "",
-        calculatorArr: [...this.state.calculatorArr, lastNumber]
+        calculatorStr: this.state.calculatorStr.concat(lastNumber)
       });
     }
   }
@@ -233,14 +233,14 @@ class Calculator extends React.Component {
     this.setState(
       {
         output: (this.state.output += e.target.value),
-        calculatorArr: [...this.state.calculatorArr, lastNumber]
+        calculatorStr: this.state.calculatorStr.concat(lastNumber)
       },
       () => this.calculate()
     );
   }
 
   calculate() {
-    console.log(this.state.calculatorArr);
+    this.state.calculatorStr;
   }
 
   render() {
