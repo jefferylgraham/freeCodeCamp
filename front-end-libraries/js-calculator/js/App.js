@@ -240,8 +240,10 @@ class Calculator extends React.Component {
   }
 
   calculate() {
+    var answer = eval(this.state.calculatorStr);
     this.setState({
-      display: eval(this.state.calculatorStr)
+      output: (this.state.output += answer),
+      display: answer
     });
   }
 
