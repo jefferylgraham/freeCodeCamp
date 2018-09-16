@@ -211,13 +211,23 @@ class Calculator extends React.Component {
   handleFunctions(e) {
     var lastNumber = Number(this.state.currentNumber);
     var endsWith = this.state.output[this.state.output.length - 1];
+    var indexOfEquals = this.state.output.indexOf("=");
     if (!OPERATORS.includes(endsWith)) {
-      this.setState({
-        output: this.state.output + e.target.value,
-        display: e.target.value,
-        currentNumber: "",
-        calculatorStr: this.state.calculatorStr.concat(lastNumber)
-      });
+      if (indexOfEquals > -1) {
+        this.setState({
+          output: (this.state.display += e.target.value),
+          display: e.target.value,
+          currentNumber: ""
+          // calculatorStr: this.state.calculatorStr.concat(lastNumber)
+        });
+      } else {
+        this.setState({
+          output: this.state.output + e.target.value,
+          display: e.target.value,
+          currentNumber: "",
+          calculatorStr: this.state.calculatorStr.concat(lastNumber)
+        });
+      }
     } else {
       this.setState({
         output: this.state.output.slice(0, -1) + e.target.value,
@@ -240,10 +250,13 @@ class Calculator extends React.Component {
   }
 
   calculate() {
+    console.log(this.state.calculatorStr);
     var answer = eval(this.state.calculatorStr);
+    console.log(answer);
     this.setState({
       output: (this.state.output += answer),
-      display: answer
+      display: answer,
+      calculatorStr: String(answer)
     });
   }
 
