@@ -1,0 +1,18 @@
+* {
+    border: 1px solid black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#timing-controls, #controls, #break-controls, #session-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
