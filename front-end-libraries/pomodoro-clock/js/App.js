@@ -2,7 +2,7 @@ class TimerLabel extends React.Component {
   render() {
     return (
       <div id="timer-label">
-        <p>session/break</p>
+        <p>{this.props.label}</p>
       </div>
     );
   }
@@ -89,14 +89,16 @@ class TimeControls extends React.Component {
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      timerLabel: "Session"
+    };
   }
 
   render() {
     return (
       <div className="text-center" id="pomodoro-clock">
         <h1>Tomato Clock</h1>
-        <TimerLabel />
+        <TimerLabel label={this.state.timerLabel} />
         <TimeLeft />
         <TimeSettings />
         <TimeControls />
