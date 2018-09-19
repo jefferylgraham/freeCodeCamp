@@ -12,10 +12,38 @@ class TimeLeft extends React.Component {
   render() {
     return (
       <div id="timer-left">
-        <p>
-          <span id="minutes">{this.props.minutesLeft}</span>:
-          <span id="seconds">{this.props.secondsLeft}</span>
-        </p>
+        <span id="tl-minutes">{this.props.minutesLeft}</span>:
+        <span id="tl-seconds">{this.props.secondsLeft}</span>
+      </div>
+    );
+  }
+}
+
+class BreakLabel extends React.Component {
+  render() {
+    return (
+      <div id="break-label">
+        Break Length
+        <div id="break-length">
+          <span id="bl-minutes">{this.props.breakMinutes}</span>:
+          <span id="bl-seconds">{this.props.breakSeconds}</span>
+        </div>
+        <BreakControls />
+      </div>
+    );
+  }
+}
+
+class SessionLabel extends React.Component {
+  render() {
+    return (
+      <div id="session-label">
+        Session Length
+        <div id="session-length">
+          <span id="sl-minutes">{this.props.sessionMinutes}</span>:
+          <span id="sl-seconds">{this.props.sessionSeconds}</span>
+        </div>
+        <SessionControls />
       </div>
     );
   }
@@ -36,32 +64,8 @@ class SessionControls extends React.Component {
   render() {
     return (
       <div id="session-controls">
-        <div id="session-decrement">#break-decrement</div>
-        <div id="session-increment">#break-increment</div>
-      </div>
-    );
-  }
-}
-
-class BreakLabel extends React.Component {
-  render() {
-    return (
-      <div id="break-label">
-        Break Length
-        <div id="break-length">#Break Length</div>
-        <BreakControls />
-      </div>
-    );
-  }
-}
-
-class SessionLabel extends React.Component {
-  render() {
-    return (
-      <div id="session-label">
-        Session Length
-        <div id="session-length">#Session Length</div>
-        <SessionControls />
+        <div id="session-decrement">#session-decrement</div>
+        <div id="session-increment">#session-increment</div>
       </div>
     );
   }
@@ -71,8 +75,14 @@ class TimeSettings extends React.Component {
   render() {
     return (
       <div id="timer-controls">
-        <BreakLabel />
-        <SessionLabel />
+        <BreakLabel
+          breakMinutes={this.props.breakMinutes}
+          breakSeconds={this.props.breakSeconds}
+        />
+        <SessionLabel
+          sessionMinutes={this.props.sessionMinutes}
+          sessionSeconds={this.props.sessionSeconds}
+        />
       </div>
     );
   }
@@ -95,7 +105,11 @@ class Pomodoro extends React.Component {
     this.state = {
       timerLabel: "Session",
       minutesLeft: "25",
-      secondsLeft: "00"
+      secondsLeft: "00",
+      breakMinutes: "5",
+      breakSeconds: "00",
+      sessionMinutes: "25",
+      sessionSeconds: "00"
     };
   }
 
@@ -108,7 +122,12 @@ class Pomodoro extends React.Component {
           minutesLeft={this.state.minutesLeft}
           secondsLeft={this.state.secondsLeft}
         />
-        <TimeSettings />
+        <TimeSettings
+          breakMinutes={this.state.breakMinutes}
+          breakSeconds={this.state.breakSeconds}
+          sessionMinutes={this.state.sessionMinutes}
+          sessionSeconds={this.state.sessionSeconds}
+        />
         <TimeControls />
       </div>
     );
