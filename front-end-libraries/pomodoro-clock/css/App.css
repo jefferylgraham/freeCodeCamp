@@ -11,7 +11,7 @@ body {
     justify-content: center;
 }
 
-#timing-controls, #controls, #break-controls, #session-controls {
+#timer-controls, #controls, #break-controls, #session-controls {
     display: flex;
     flex-direction: row;
     justify-content: center;
