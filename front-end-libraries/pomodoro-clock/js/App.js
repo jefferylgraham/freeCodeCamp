@@ -31,6 +31,51 @@ class Session extends React.Component {
   }
 }
 
+class Decrement extends React.Component {
+  render() {
+    return (
+      <button>
+        <i className="fas fa-angle-double-down" />
+      </button>
+    );
+  }
+}
+
+class Increment extends React.Component {
+  render() {
+    return (
+      <button>
+        <i className="fas fa-angle-double-up" />
+      </button>
+    );
+  }
+}
+
+class StartStop extends React.Component {
+  render() {
+    return (
+      <button>
+        <span>
+          <i className="fas fa-play" />
+        </span>
+        <span>
+          <i className="fas fa-pause" />
+        </span>
+      </button>
+    );
+  }
+}
+
+class Reset extends React.Component {
+  render() {
+    return (
+      <button>
+        <i className="fas fa-sync-alt" />
+      </button>
+    );
+  }
+}
+
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
@@ -48,12 +93,11 @@ class Pomodoro extends React.Component {
     return (
       <div className="text-center" id="pomodoro-clock">
         <h1>Tomato Clock</h1>
-        <TimeLeft
-          minutesLeft={this.state.minutesLeft}
-          secondsLeft={this.state.secondsLeft}
-        />
         <div id="timer-left">
-          <p>#timer-left div</p>
+          <TimeLeft
+            minutesLeft={this.state.minutesLeft}
+            secondsLeft={this.state.secondsLeft}
+          />
         </div>
         <div id="timer-controls">
           <div id="break-label">
@@ -63,8 +107,12 @@ class Pomodoro extends React.Component {
               breakSeconds={this.state.breakSeconds}
             />
             <div id="break-controls">
-              <div id="break-decrement">#break-decrement</div>
-              <div id="break-increment">#break-increment</div>
+              <div id="break-decrement">
+                <Decrement />
+              </div>
+              <div id="break-increment">
+                <Increment />
+              </div>
             </div>
           </div>
           <div id="session-label">
@@ -74,14 +122,22 @@ class Pomodoro extends React.Component {
               sessionSeconds={this.state.sessionSeconds}
             />
             <div id="session-controls">
-              <div id="session-decrement">#session-decrement</div>
-              <div id="session-increment">#session-increment</div>
+              <div id="session-decrement">
+                <Decrement />
+              </div>
+              <div id="session-increment">
+                <Increment />
+              </div>
             </div>
           </div>
         </div>
         <div id="controls">
-          <div id="start-stop">#start-stop</div>
-          <div id="reset">#reset</div>
+          <div id="start-stop">
+            <StartStop />
+          </div>
+          <div id="reset">
+            <Reset />
+          </div>
         </div>
       </div>
     );
