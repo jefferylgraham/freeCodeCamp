@@ -34,7 +34,7 @@ class Session extends React.Component {
 class Decrement extends React.Component {
   render() {
     return (
-      <button>
+      <button onClick={this.props.onClick}>
         <i className="fas fa-angle-double-down" />
       </button>
     );
@@ -87,6 +87,25 @@ class Pomodoro extends React.Component {
       sessionMinutes: "25",
       sessionSeconds: "00"
     };
+
+    this.decrement = this.decrement.bind(this);
+  }
+
+  decrement(interval) {
+    switch (interval) {
+      case "break":
+        this.setState({
+          breakMinutes: (this.state.breakMinutes -= 1)
+        });
+        break;
+      case "session":
+        this.setState({
+          sessionMinutes: (this.state.sessionMinutes -= 1)
+        });
+        break;
+      default:
+        console.log("Default");
+    }
   }
 
   render() {
@@ -108,7 +127,7 @@ class Pomodoro extends React.Component {
             />
             <div id="break-controls">
               <div id="break-decrement">
-                <Decrement />
+                <Decrement onClick={() => this.decrement("break")} />
               </div>
               <div id="break-increment">
                 <Increment />
@@ -123,7 +142,7 @@ class Pomodoro extends React.Component {
             />
             <div id="session-controls">
               <div id="session-decrement">
-                <Decrement />
+                <Decrement onClick={() => this.decrement("session")} />
               </div>
               <div id="session-increment">
                 <Increment />
