@@ -67,7 +67,7 @@ class StartStop extends React.Component {
 class Reset extends React.Component {
   render() {
     return (
-      <button>
+      <button onClick={this.props.onClick}>
         <i className="fas fa-sync-alt" />
       </button>
     );
@@ -88,6 +88,7 @@ class Pomodoro extends React.Component {
     this.decrement = this.decrement.bind(this);
     this.increment = this.increment.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   decrement(interval) {
@@ -132,6 +133,16 @@ class Pomodoro extends React.Component {
     });
   }
 
+  reset() {
+    this.setState({
+      minutesLeft: "25",
+      secondsLeft: "00",
+      breakLength: "5",
+      sessionLength: "25",
+      running: false
+    });
+  }
+
   render() {
     return (
       <div className="text-center" id="pomodoro-clock">
@@ -173,7 +184,7 @@ class Pomodoro extends React.Component {
             <StartStop onClick={this.toggleStartStop} />
           </div>
           <div id="reset">
-            <Reset />
+            <Reset onClick={this.reset} />
           </div>
         </div>
       </div>
