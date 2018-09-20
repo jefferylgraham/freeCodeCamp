@@ -13,8 +13,7 @@ class Break extends React.Component {
   render() {
     return (
       <div id="break-length">
-        <span>{this.props.breakMinutes}</span>:
-        <span>{this.props.breakSeconds}</span>
+        <span>{this.props.breakLength}</span>
       </div>
     );
   }
@@ -24,8 +23,7 @@ class Session extends React.Component {
   render() {
     return (
       <div id="session-length">
-        <span>{this.props.sessionMinutes}</span>:
-        <span>{this.props.sessionSeconds}</span>
+        <span>{this.props.sessionLength}</span>
       </div>
     );
   }
@@ -44,7 +42,7 @@ class Decrement extends React.Component {
 class Increment extends React.Component {
   render() {
     return (
-      <button>
+      <button onClick={this.props.onClick}>
         <i className="fas fa-angle-double-up" />
       </button>
     );
@@ -82,25 +80,41 @@ class Pomodoro extends React.Component {
     this.state = {
       minutesLeft: "25",
       secondsLeft: "00",
-      breakMinutes: "5",
-      breakSeconds: "00",
-      sessionMinutes: "25",
-      sessionSeconds: "00"
+      breakLength: "5",
+      sessionLength: "25"
     };
 
     this.decrement = this.decrement.bind(this);
+    this.increment = this.increment.bind(this);
   }
 
   decrement(interval) {
     switch (interval) {
       case "break":
         this.setState({
-          breakMinutes: (this.state.breakMinutes -= 1)
+          breakLength: (this.state.breakLength -= 1)
         });
         break;
       case "session":
         this.setState({
-          sessionMinutes: (this.state.sessionMinutes -= 1)
+          sessionLength: (this.state.sessionLength -= 1)
+        });
+        break;
+      default:
+        console.log("Default");
+    }
+  }
+
+  increment(interval) {
+    switch (interval) {
+      case "break":
+        this.setState({
+          breakLength: (this.state.breakLength += 1)
+        });
+        break;
+      case "session":
+        this.setState({
+          sessionLength: (this.state.sessionLength += 1)
         });
         break;
       default:
@@ -121,31 +135,25 @@ class Pomodoro extends React.Component {
         <div id="timer-controls">
           <div id="break-label">
             Break Length
-            <Break
-              breakMinutes={this.state.breakMinutes}
-              breakSeconds={this.state.breakSeconds}
-            />
+            <Break breakLength={this.state.breakLength} />
             <div id="break-controls">
               <div id="break-decrement">
                 <Decrement onClick={() => this.decrement("break")} />
               </div>
               <div id="break-increment">
-                <Increment />
+                <Increment onClick={() => this.increment("break")} />
               </div>
             </div>
           </div>
           <div id="session-label">
             Session Length
-            <Session
-              sessionMinutes={this.state.sessionMinutes}
-              sessionSeconds={this.state.sessionSeconds}
-            />
+            <Session sessionLength={this.state.sessionLength} />
             <div id="session-controls">
               <div id="session-decrement">
                 <Decrement onClick={() => this.decrement("session")} />
               </div>
               <div id="session-increment">
-                <Increment />
+                <Increment onClick={() => this.increment("session")} />
               </div>
             </div>
           </div>
