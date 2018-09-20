@@ -52,7 +52,7 @@ class Increment extends React.Component {
 class StartStop extends React.Component {
   render() {
     return (
-      <button>
+      <button onClick={this.props.onClick}>
         <span>
           <i className="fas fa-play" />
         </span>
@@ -81,11 +81,13 @@ class Pomodoro extends React.Component {
       minutesLeft: "25",
       secondsLeft: "00",
       breakLength: "5",
-      sessionLength: "25"
+      sessionLength: "25",
+      running: false
     };
 
     this.decrement = this.decrement.bind(this);
     this.increment = this.increment.bind(this);
+    this.toggleStartStop = this.toggleStartStop.bind(this);
   }
 
   decrement(interval) {
@@ -122,6 +124,12 @@ class Pomodoro extends React.Component {
       default:
         console.log("Default");
     }
+  }
+
+  toggleStartStop() {
+    this.setState({
+      running: !this.state.running
+    });
   }
 
   render() {
@@ -162,7 +170,7 @@ class Pomodoro extends React.Component {
         </div>
         <div id="controls">
           <div id="start-stop">
-            <StartStop />
+            <StartStop onClick={this.toggleStartStop} />
           </div>
           <div id="reset">
             <Reset />
