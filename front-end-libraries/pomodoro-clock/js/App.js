@@ -116,7 +116,7 @@ class Pomodoro extends React.Component {
       case "session":
         this.setState({
           sessionLength: (this.state.sessionLength += 1),
-          minutesLeft: (this.state.minutesLeft -= 1)
+          minutesLeft: (this.state.minutesLeft += 1)
         });
         break;
       default:
