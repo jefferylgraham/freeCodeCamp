@@ -94,10 +94,10 @@ class Pomodoro extends React.Component {
     super(props);
     this.state = {
       session: true,
-      minutesLeft: 1,
+      minutesLeft: 25,
       secondsLeft: 0,
       breakLength: 5,
-      sessionLength: 1,
+      sessionLength: 25,
       running: false
     };
 
@@ -131,19 +131,30 @@ class Pomodoro extends React.Component {
       }
       if (minutes == 0 && seconds == 0) {
         this.alarm();
-        this.setState({
-          session: !this.state.session,
-          minutesLeft: this.state.breakLength,
-          secondsLeft: 0
-        });
+        this.changeInterval();
       }
     }
   }
 
   alarm() {
     var beep = document.getElementById("beep");
-    console.log(beep);
     beep.play();
+  }
+
+  changeInterval() {
+    if (this.state.session) {
+      this.setState({
+        session: !this.state.session,
+        minutesLeft: this.state.breakLength,
+        secondsLeft: 0
+      });
+    } else {
+      this.setState({
+        session: !this.state.session,
+        minutesLeft: this.state.sessionLength,
+        secondsLeft: 0
+      });
+    }
   }
 
   decrement(interval) {
