@@ -158,38 +158,42 @@ class Pomodoro extends React.Component {
   }
 
   decrement(interval) {
-    switch (interval) {
-      case "break":
-        this.setState({
-          breakLength: (this.state.breakLength -= 1)
-        });
-        break;
-      case "session":
-        this.setState({
-          sessionLength: (this.state.sessionLength -= 1),
-          minutesLeft: (this.state.minutesLeft -= 1)
-        });
-        break;
-      default:
-        console.log("Default");
+    if (!this.state.running) {
+      switch (interval) {
+        case "break":
+          this.setState({
+            breakLength: (this.state.breakLength -= 1)
+          });
+          break;
+        case "session":
+          this.setState({
+            sessionLength: (this.state.sessionLength -= 1),
+            minutesLeft: (this.state.minutesLeft -= 1)
+          });
+          break;
+        default:
+          console.log("Default");
+      }
     }
   }
 
   increment(interval) {
-    switch (interval) {
-      case "break":
-        this.setState({
-          breakLength: (this.state.breakLength += 1)
-        });
-        break;
-      case "session":
-        this.setState({
-          sessionLength: (this.state.sessionLength += 1),
-          minutesLeft: (this.state.minutesLeft += 1)
-        });
-        break;
-      default:
-        console.log("Default");
+    if (!this.state.running) {
+      switch (interval) {
+        case "break":
+          this.setState({
+            breakLength: (this.state.breakLength += 1)
+          });
+          break;
+        case "session":
+          this.setState({
+            sessionLength: (this.state.sessionLength += 1),
+            minutesLeft: (this.state.minutesLeft += 1)
+          });
+          break;
+        default:
+          console.log("Default");
+      }
     }
   }
 
