@@ -87,6 +87,7 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      session: true,
       minutesLeft: 25,
       secondsLeft: 0,
       breakLength: 5,
@@ -111,9 +112,11 @@ class Pomodoro extends React.Component {
   countdown() {
     if (this.state.running) {
       let seconds = this.state.secondsLeft;
+      let minutes = this.state.minutesLeft;
       if (seconds == 0) {
         this.setState({
-          secondsLeft: 59
+          secondsLeft: 59,
+          minutesLeft: (this.state.minutesLeft -= 1)
         });
       } else {
         this.setState({
@@ -167,6 +170,7 @@ class Pomodoro extends React.Component {
 
   reset() {
     this.setState({
+      session: true,
       minutesLeft: 25,
       secondsLeft: 0,
       breakLength: 5,
@@ -180,7 +184,7 @@ class Pomodoro extends React.Component {
       <div className="text-center" id="pomodoro-clock">
         <h1>Tomato Clock</h1>
         <div id="timer-left">
-          Session
+          {this.state.session ? "Session" : "Break"}
           <TimeLeft
             minutesLeft={this.state.minutesLeft}
             secondsLeft={this.state.secondsLeft}
