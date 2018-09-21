@@ -123,6 +123,13 @@ class Pomodoro extends React.Component {
           secondsLeft: (this.state.secondsLeft -= 1)
         });
       }
+      if (minutes == 0 && seconds == 0) {
+        this.setState({
+          session: !this.state.session,
+          minutesLeft: this.state.breakLength,
+          secondsLeft: 0
+        });
+      }
     }
   }
 
