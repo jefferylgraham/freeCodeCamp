@@ -159,6 +159,7 @@ class Pomodoro extends React.Component {
 
   decrement(interval) {
     if (!this.state.running) {
+      let minutes = this.state.sessionLength;
       switch (interval) {
         case "break":
           this.setState({
@@ -167,8 +168,9 @@ class Pomodoro extends React.Component {
           break;
         case "session":
           this.setState({
-            sessionLength: (this.state.sessionLength -= 1),
-            minutesLeft: (this.state.minutesLeft -= 1)
+            sessionLength: (minutes -= 1),
+            minutesLeft: (this.state.sessionLength -= 1),
+            secondsLeft: 0
           });
           break;
         default:
@@ -179,6 +181,7 @@ class Pomodoro extends React.Component {
 
   increment(interval) {
     if (!this.state.running) {
+      let minutes = this.state.sessionLength;
       switch (interval) {
         case "break":
           this.setState({
@@ -187,8 +190,9 @@ class Pomodoro extends React.Component {
           break;
         case "session":
           this.setState({
-            sessionLength: (this.state.sessionLength += 1),
-            minutesLeft: (this.state.minutesLeft += 1)
+            sessionLength: (minutes += 1),
+            minutesLeft: (this.state.sessionLength += 1),
+            secondsLeft: 0
           });
           break;
         default:
