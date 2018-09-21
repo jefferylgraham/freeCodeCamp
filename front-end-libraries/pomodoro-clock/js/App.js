@@ -83,15 +83,21 @@ class Reset extends React.Component {
   }
 }
 
+// class Audio extends React.Component {
+//   render() {
+//     return <audio id="beep" src={this.props.soundSrc} />;
+//   }
+// }
+
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       session: true,
-      minutesLeft: 25,
+      minutesLeft: 1,
       secondsLeft: 0,
       breakLength: 5,
-      sessionLength: 25,
+      sessionLength: 1,
       running: false
     };
 
@@ -124,6 +130,7 @@ class Pomodoro extends React.Component {
         });
       }
       if (minutes == 0 && seconds == 0) {
+        this.alarm();
         this.setState({
           session: !this.state.session,
           minutesLeft: this.state.breakLength,
@@ -131,6 +138,12 @@ class Pomodoro extends React.Component {
         });
       }
     }
+  }
+
+  alarm() {
+    var beep = document.getElementById("beep");
+    console.log(beep);
+    beep.play();
   }
 
   decrement(interval) {
@@ -189,6 +202,7 @@ class Pomodoro extends React.Component {
   render() {
     return (
       <div className="text-center" id="pomodoro-clock">
+        <audio id="beep" src="sound/alarm.mp3" />
         <h1>Tomato Clock</h1>
         <div id="timer-left">
           {this.state.session ? "Session" : "Break"}
