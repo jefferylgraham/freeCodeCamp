@@ -245,7 +245,13 @@ class Pomodoro extends React.Component {
                 />
               </div>
               <div id="break-increment">
-                <Increment onClick={() => this.increment("break")} />
+                <Increment
+                  onClick={
+                    this.state.breakLength < 60
+                      ? () => this.increment("break")
+                      : null
+                  }
+                />
               </div>
             </div>
           </div>
@@ -263,7 +269,13 @@ class Pomodoro extends React.Component {
                 />
               </div>
               <div id="session-increment">
-                <Increment onClick={() => this.increment("session")} />
+                <Increment
+                  onClick={
+                    this.state.sessionLength < 60
+                      ? () => this.increment("session")
+                      : null
+                  }
+                />
               </div>
             </div>
           </div>
