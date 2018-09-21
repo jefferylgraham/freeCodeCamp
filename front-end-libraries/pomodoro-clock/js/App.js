@@ -236,7 +236,13 @@ class Pomodoro extends React.Component {
             <Break breakLength={this.state.breakLength} />
             <div id="break-controls">
               <div id="break-decrement">
-                <Decrement onClick={() => this.decrement("break")} />
+                <Decrement
+                  onClick={
+                    this.state.breakLength > 1
+                      ? () => this.decrement("break")
+                      : null
+                  }
+                />
               </div>
               <div id="break-increment">
                 <Increment onClick={() => this.increment("break")} />
@@ -248,7 +254,13 @@ class Pomodoro extends React.Component {
             <Session sessionLength={this.state.sessionLength} />
             <div id="session-controls">
               <div id="session-decrement">
-                <Decrement onClick={() => this.decrement("session")} />
+                <Decrement
+                  onClick={
+                    this.state.sessionLength > 1
+                      ? () => this.decrement("session")
+                      : null
+                  }
+                />
               </div>
               <div id="session-increment">
                 <Increment onClick={() => this.increment("session")} />
