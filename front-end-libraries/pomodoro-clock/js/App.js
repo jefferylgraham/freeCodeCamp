@@ -2,8 +2,17 @@ class TimeLeft extends React.Component {
   render() {
     return (
       <div id="timer-label">
-        <span>{this.props.minutesLeft}</span>:
-        <span>{this.props.secondsLeft}</span>
+        <span id="minutes">
+          {this.props.minutesLeft < 10
+            ? "0" + this.props.minutesLeft
+            : this.props.minutesLeft}
+        </span>
+        :
+        <span id="seconds">
+          {this.props.secondsLeft < 10
+            ? "0" + this.props.secondsLeft
+            : this.props.secondsLeft}
+        </span>
       </div>
     );
   }
@@ -78,10 +87,10 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      minutesLeft: "25",
-      secondsLeft: "00",
-      breakLength: "5",
-      sessionLength: "25",
+      minutesLeft: 25,
+      secondsLeft: 0,
+      breakLength: 5,
+      sessionLength: 25,
       running: false
     };
 
@@ -89,6 +98,29 @@ class Pomodoro extends React.Component {
     this.increment = this.increment.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
     this.reset = this.reset.bind(this);
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.countdown(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  countdown() {
+    if (this.state.running) {
+      let seconds = this.state.secondsLeft;
+      if (seconds == 0) {
+        this.setState({
+          secondsLeft: 59
+        });
+      } else {
+        this.setState({
+          secondsLeft: (this.state.secondsLeft -= 1)
+        });
+      }
+    }
   }
 
   decrement(interval) {
@@ -135,10 +167,10 @@ class Pomodoro extends React.Component {
 
   reset() {
     this.setState({
-      minutesLeft: "25",
-      secondsLeft: "00",
-      breakLength: "5",
-      sessionLength: "25",
+      minutesLeft: 25,
+      secondsLeft: 0,
+      breakLength: 5,
+      sessionLength: 25,
       running: false
     });
   }
@@ -148,6 +180,7 @@ class Pomodoro extends React.Component {
       <div className="text-center" id="pomodoro-clock">
         <h1>Tomato Clock</h1>
         <div id="timer-left">
+          Session
           <TimeLeft
             minutesLeft={this.state.minutesLeft}
             secondsLeft={this.state.secondsLeft}
