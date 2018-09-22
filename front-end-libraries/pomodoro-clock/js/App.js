@@ -1,7 +1,7 @@
 class TimeLeft extends React.Component {
   render() {
     return (
-      <div id="timer-label">
+      <div id="time-left">
         <span id="minutes">
           {this.props.minutesLeft < 10
             ? "0" + this.props.minutesLeft
@@ -223,7 +223,7 @@ class Pomodoro extends React.Component {
       <div className="text-center" id="pomodoro-clock">
         <audio id="beep" src="sound/alarm.mp3" />
         <h1>Tomato Clock</h1>
-        <div id="timer-left">
+        <div id="timer-label">
           {this.state.session ? "Session" : "Break"}
           <TimeLeft
             minutesLeft={this.state.minutesLeft}
@@ -281,7 +281,7 @@ class Pomodoro extends React.Component {
           </div>
         </div>
         <div id="controls">
-          <div id="start-stop">
+          <div id="start_stop">
             <StartStop onClick={this.toggleStartStop} />
           </div>
           <div id="reset">
