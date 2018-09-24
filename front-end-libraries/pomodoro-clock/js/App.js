@@ -2,17 +2,13 @@ class TimeLeft extends React.Component {
   render() {
     return (
       <div id="time-left">
-        <span id="minutes">
-          {this.props.minutesLeft < 10
-            ? "0" + this.props.minutesLeft
-            : this.props.minutesLeft}
-        </span>
+        {this.props.minutesLeft < 10
+          ? "0" + this.props.minutesLeft
+          : this.props.minutesLeft}
         :
-        <span id="seconds">
-          {this.props.secondsLeft < 10
-            ? "0" + this.props.secondsLeft
-            : this.props.secondsLeft}
-        </span>
+        {this.props.secondsLeft < 10
+          ? "0" + this.props.secondsLeft
+          : this.props.secondsLeft}
       </div>
     );
   }
@@ -20,21 +16,13 @@ class TimeLeft extends React.Component {
 
 class Break extends React.Component {
   render() {
-    return (
-      <div id="break-length">
-        <span>{this.props.breakLength}</span>
-      </div>
-    );
+    return <div id="break-length">{Number(this.props.breakLength)}</div>;
   }
 }
 
 class Session extends React.Component {
   render() {
-    return (
-      <div id="session-length">
-        <span>{this.props.sessionLength}</span>
-      </div>
-    );
+    return <div id="session-length">{this.props.sessionLength}</div>;
   }
 }
 
@@ -76,7 +64,7 @@ class StartStop extends React.Component {
 class Reset extends React.Component {
   render() {
     return (
-      <button onClick={this.props.onClick}>
+      <button id="reset" onClick={this.props.onClick}>
         <i className="fas fa-sync-alt" />
       </button>
     );
@@ -284,7 +272,7 @@ class Pomodoro extends React.Component {
           <div id="start_stop">
             <StartStop onClick={this.toggleStartStop} />
           </div>
-          <div id="reset">
+          <div>
             <Reset onClick={this.reset} />
           </div>
         </div>
