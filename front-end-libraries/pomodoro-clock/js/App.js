@@ -210,7 +210,7 @@ class Pomodoro extends React.Component {
     return (
       <div className="text-center" id="pomodoro-clock">
         <audio id="beep" src="sound/alarm.mp3" />
-        <h1>Tomato Clock</h1>
+        <h1>Pomodoro Clock</h1>
         <div id="timer-label">
           {this.state.session ? "Session" : "Break"}
           <TimeLeft
