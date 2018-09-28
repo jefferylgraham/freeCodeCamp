@@ -4,13 +4,19 @@ d3.json(
   var GDPs = [],
     dates = [],
     height = 400,
-    width = 600;
+    width = 800;
 
   //Iterate through data object to get GDPs & Dates into array
   for (var i = 0; i < data.data.length; i++) {
     GDPs.push(data.data[i][1]);
     dates.push(new Date(data.data[i][0]));
   }
+
+  //Define y scale
+  var yScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(GDPs)])
+    .range([0, height]);
 
   //Add chart of GDPs
   var myChart = d3
@@ -24,9 +30,9 @@ d3.json(
     .append("rect")
     .attr("fill", "blue")
     .attr("width", 1)
-    .attr("height", d => d)
+    .attr("height", d => yScale(d))
     .attr("x", (d, i) => i)
-    .attr("y", d => height - d);
+    .attr("y", d => height - yScale(d));
 
   console.log("here");
 });
