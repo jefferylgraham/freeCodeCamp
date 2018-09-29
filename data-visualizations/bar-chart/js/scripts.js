@@ -3,9 +3,9 @@ d3.json(
 ).then(function(data) {
   var GDPs = [],
     dates = [],
-    margin = { top: 0, right: 0, bottom: 30, left: 20 },
+    margin = { top: 0, right: 0, bottom: 30, left: 40 },
     height = 400 - margin.top - margin.bottom,
-    width = 800 - margin.left - margin.right;
+    width = 1000 - margin.left - margin.right;
 
   //Iterate through data object to get GDPs & Dates into array
   for (var i = 0; i < data.data.length; i++) {
@@ -97,13 +97,13 @@ d3.json(
   var yGuide = d3
     .select("#visual svg")
     .append("g")
-    .attr("transform", "translate(20,0)")
+    .attr("transform", "translate(40,0)")
     .call(yTicks);
 
   var xGuide = d3
     .select("#visual svg")
     .append("g")
-    .attr("transform", "translate(20," + height + ")")
+    .attr("transform", "translate(40," + height + ")")
     .call(xTicks);
 
   //Add transition effect for chart
