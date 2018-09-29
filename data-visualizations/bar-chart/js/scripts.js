@@ -24,6 +24,15 @@ d3.json(
     .domain(GDPs)
     .range([0, width]);
 
+  //Define tooltip
+  var tooltip = d3
+    .select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("padding", "0 10px")
+    .style("background", "white")
+    .style("opcaity", 0);
+
   //Add chart of GDPs
   var myChart = d3
     .select("#visual")
@@ -41,6 +50,19 @@ d3.json(
     .attr("y", height)
 
     .on("mouseover", function(d) {
+      //add tooltip
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0.9);
+
+      //tooltip location
+      tooltip
+        .html(d)
+        .style("left", d3.event.pageX - 35 + "px")
+        .style("top", "350px");
+
+      //add fill on mouseover
       tempColor = this.style.fill;
       d3.select(this).style("fill", "yellow");
     })
