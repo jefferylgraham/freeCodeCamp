@@ -35,10 +35,13 @@ d3.json(
     .enter()
     .append("rect")
     .attr("fill", "blue")
-    .attr("width", 1)
+    .attr("width", xScale.bandwidth())
     .attr("height", d => yScale(d))
     .attr("x", d => xScale(d))
-    .attr("y", d => height - yScale(d));
+    .attr("y", d => height - yScale(d))
 
-  console.log("here");
+    .on("mouseover", function(d) {
+      tempColor = this.style.fill;
+      d3.select(this).style("fill", "yellow");
+    });
 });
