@@ -34,6 +34,15 @@ d3.json(
     .domain(GDPs)
     .range([0, width]);
 
+  //Define x axis values
+  var xAxisValues = d3
+    .scaleTime()
+    .domain([dates[0], dates[dates.length - 1]])
+    .range([0, width]);
+
+  //define x tick marks
+  var xTicks = d3.axisBottom(xAxisValues).ticks(d3.timeYear.every(5));
+
   //Define tooltip
   var tooltip = d3
     .select("body")
@@ -90,6 +99,12 @@ d3.json(
     .append("g")
     .attr("transform", "translate(20,0)")
     .call(yTicks);
+
+  var xGuide = d3
+    .select("#visual svg")
+    .append("g")
+    .attr("transform", "translate(20," + height + ")")
+    .call(xTicks);
 
   //Add transition effect for chart
   myChart
