@@ -13,16 +13,29 @@ d3.json(
     yRaceTimes.push(data[i].Seconds);
   }
 
+  //define x scale
   var xScale = d3
     .scaleLinear()
     .domain([1993, 2016])
     .range([0, width]);
 
+  //define y scale
   var yScale = d3
     .scaleLinear()
     .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
     .range([0, height]);
 
+  //define tooltip
+  var tooltip = d3
+    .select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("padding", "0 10px")
+    .style("background", "white")
+    .style("opacity", 0)
+    .style("visibiltiy", "hidden");
+
+  //draw the scatter points for the graph
   var myGraph = d3
     .select("#visual")
     .append("svg")
@@ -38,10 +51,20 @@ d3.json(
     .attr("r", 0)
     .style("fill", "blue")
     .on("mouseover", function(d) {
-      console.log(this);
+      //show tooltip on mouseover
+      tooltip
+        .transition()
+        .duration(200)
+        .style("visibility", "visible")
+        .style("opacity", 0.9);
+      tooltip
+        .html(d)
+        .style("left", d3.event.pageX - 35 + "px")
+        .style("top", d3.event.pageY - 30 + "px");
     })
     .on("mouseout", function(d) {
-      //
+      //hide tooltip on mouseout
+      tooltip.style("visibility", "hidden");
     });
 
   //add transition effect
