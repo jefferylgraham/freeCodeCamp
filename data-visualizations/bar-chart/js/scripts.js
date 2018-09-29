@@ -58,7 +58,9 @@ d3.json(
 
       //tooltip location
       tooltip
-        .html(d)
+        .html(
+          "<div style='fonts-size: 2rem; font-weight: bold'>" + d + "</div>"
+        )
         .style("left", d3.event.pageX - 35 + "px")
         .style("top", "350px");
 
