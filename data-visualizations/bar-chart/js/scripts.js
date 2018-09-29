@@ -18,6 +18,12 @@ d3.json(
     .domain([0, d3.max(GDPs)])
     .range([0, height]);
 
+  //Define x scale
+  var xScale = d3
+    .scaleBand()
+    .domain(GDPs)
+    .range([0, width]);
+
   //Add chart of GDPs
   var myChart = d3
     .select("#visual")
@@ -31,7 +37,7 @@ d3.json(
     .attr("fill", "blue")
     .attr("width", 1)
     .attr("height", d => yScale(d))
-    .attr("x", (d, i) => i)
+    .attr("x", d => xScale(d))
     .attr("y", d => height - yScale(d));
 
   console.log("here");
