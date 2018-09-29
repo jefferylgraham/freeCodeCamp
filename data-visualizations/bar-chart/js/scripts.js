@@ -18,6 +18,15 @@ d3.json(
     .domain([0, d3.max(GDPs)])
     .range([0, height]);
 
+  //Define y axis values
+  var yAxisValues = d3
+    .scaleLinear()
+    .domain([0, d3.max(GDPs)])
+    .range([height, 0]);
+
+  //Y Tick Marks
+  var yTicks = d3.axisLeft(yAxisValues).ticks(10);
+
   //Define x scale
   var xScale = d3
     .scaleBand()
@@ -39,6 +48,7 @@ d3.json(
     .append("svg")
     .attr("width", width)
     .attr("height", height)
+    .append("g")
     .selectAll("rect")
     .data(GDPs)
     .enter()
@@ -72,6 +82,12 @@ d3.json(
     .on("mouseout", function(d) {
       d3.select(this).style("fill", tempColor);
     });
+
+  var yGuide = d3
+    .select("#visual svg")
+    .append("g")
+    .attr("transform", "translate(20,0)")
+    .call(yTicks);
 
   //Add transition effect for chart
   myChart
