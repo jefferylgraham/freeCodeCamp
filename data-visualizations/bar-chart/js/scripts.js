@@ -13,8 +13,6 @@ d3.json(
     dates.push(data.data[i][0]);
   }
 
-  console.log(dates);
-
   //Define y scale
   var yScale = d3
     .scaleLinear()
@@ -49,10 +47,12 @@ d3.json(
   var tooltip = d3
     .select("body")
     .append("div")
+    .attr("id", "tooltip")
     .style("position", "absolute")
     .style("padding", "0 10px")
     .style("background", "white")
-    .style("opacity", 0);
+    .style("opacity", 0)
+    .style("visibilty", "hidden");
 
   //Add chart of GDPs
   var myChart = d3
@@ -75,18 +75,20 @@ d3.json(
     .attr("x", d => xScale(d))
     .attr("y", height)
 
-    .on("mouseover", function(d) {
+    .on("mouseover", function(d, i) {
       //add tooltip
       tooltip
         .transition()
         .duration(200)
-        .style("opacity", 0.9);
+        .style("opacity", 0.9)
+        .style("visibility", "visible");
 
       //tooltip location
       tooltip
         .html(
           "<div style='fonts-size: 2rem; font-weight: bold'>" + d + "</div>"
         )
+        .attr("data-date", dates[i])
         .style("left", d3.event.pageX - 35 + "px")
         .style("top", "350px");
 
@@ -96,6 +98,7 @@ d3.json(
     })
 
     .on("mouseout", function(d) {
+      tooltip.style("visibility", "hidden");
       d3.select(this).style("fill", tempColor);
     });
 
