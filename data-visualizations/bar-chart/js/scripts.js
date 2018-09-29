@@ -3,8 +3,9 @@ d3.json(
 ).then(function(data) {
   var GDPs = [],
     dates = [],
-    height = 400,
-    width = 800;
+    margin = { top: 0, right: 0, bottom: 30, left: 20 },
+    height = 400 - margin.top - margin.bottom,
+    width = 800 - margin.left - margin.right;
 
   //Iterate through data object to get GDPs & Dates into array
   for (var i = 0; i < data.data.length; i++) {
@@ -46,9 +47,10 @@ d3.json(
   var myChart = d3
     .select("#visual")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.right + ")")
     .selectAll("rect")
     .data(GDPs)
     .enter()
