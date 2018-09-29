@@ -97,12 +97,14 @@ d3.json(
   var yGuide = d3
     .select("#visual svg")
     .append("g")
+    .attr("id", "y-axis")
     .attr("transform", "translate(40,0)")
     .call(yTicks);
 
   var xGuide = d3
     .select("#visual svg")
     .append("g")
+    .attr("id", "x-axis")
     .attr("transform", "translate(40," + height + ")")
     .call(xTicks);
 
