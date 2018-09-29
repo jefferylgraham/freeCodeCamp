@@ -23,7 +23,8 @@ d3.json(
     .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
     .range([0, height]);
 
-  d3.select("#visual")
+  var myGraph = d3
+    .select("#visual")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -32,8 +33,23 @@ d3.json(
     .data(data)
     .enter()
     .append("circle")
+    .attr("cx", (d, i) => 0)
+    .attr("cy", (d, i) => 0)
+    .attr("r", 0)
+    .style("fill", "blue")
+    .on("mouseover", function(d) {
+      console.log(this);
+    })
+    .on("mouseout", function(d) {
+      //
+    });
+
+  //add transition effect
+  myGraph
+    .transition()
     .attr("cx", (d, i) => xScale(data[i].Year))
     .attr("cy", (d, i) => yScale(data[i].Seconds))
     .attr("r", 5)
-    .style("fill", "blue");
+    .duration(1000)
+    .ease(d3.easeCircleIn);
 });
