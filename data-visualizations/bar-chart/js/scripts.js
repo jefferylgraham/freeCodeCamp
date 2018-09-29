@@ -36,9 +36,9 @@ d3.json(
     .append("rect")
     .attr("fill", "blue")
     .attr("width", xScale.bandwidth())
-    .attr("height", d => yScale(d))
+    .attr("height", 0)
     .attr("x", d => xScale(d))
-    .attr("y", d => height - yScale(d))
+    .attr("y", height)
 
     .on("mouseover", function(d) {
       tempColor = this.style.fill;
@@ -48,4 +48,13 @@ d3.json(
     .on("mouseout", function(d) {
       d3.select(this).style("fill", tempColor);
     });
+
+  //Add transition effect for chart
+  myChart
+    .transition()
+    .attr("height", d => yScale(d))
+    .attr("y", d => height - yScale(d))
+    .delay((d, i) => i * 20)
+    .duration(1000)
+    .ease(d3.easeBounceOut);
 });
