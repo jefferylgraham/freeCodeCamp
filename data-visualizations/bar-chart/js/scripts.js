@@ -10,8 +10,10 @@ d3.json(
   //Iterate through data object to get GDPs & Dates into array
   for (var i = 0; i < data.data.length; i++) {
     GDPs.push(data.data[i][1]);
-    dates.push(new Date(data.data[i][0]));
+    dates.push(data.data[i][0]);
   }
+
+  console.log(dates);
 
   //Define y scale
   var yScale = d3
@@ -37,7 +39,7 @@ d3.json(
   //Define x axis values
   var xAxisValues = d3
     .scaleTime()
-    .domain([dates[0], dates[dates.length - 1]])
+    .domain([new Date(dates[0]), new Date(dates[dates.length - 1])])
     .range([0, width]);
 
   //define x tick marks
@@ -50,7 +52,7 @@ d3.json(
     .style("position", "absolute")
     .style("padding", "0 10px")
     .style("background", "white")
-    .style("opcaity", 0);
+    .style("opacity", 0);
 
   //Add chart of GDPs
   var myChart = d3
@@ -64,6 +66,9 @@ d3.json(
     .data(GDPs)
     .enter()
     .append("rect")
+    .attr("class", "bar")
+    .attr("data-gdp", (d, i) => GDPs[i])
+    .attr("data-date", (d, i) => dates[i])
     .attr("fill", "blue")
     .attr("width", xScale.bandwidth())
     .attr("height", 0)
