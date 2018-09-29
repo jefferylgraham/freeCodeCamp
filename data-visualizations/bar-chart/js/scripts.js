@@ -43,5 +43,9 @@ d3.json(
     .on("mouseover", function(d) {
       tempColor = this.style.fill;
       d3.select(this).style("fill", "yellow");
+    })
+
+    .on("mouseout", function(d) {
+      d3.select(this).style("fill", tempColor);
     });
 });
