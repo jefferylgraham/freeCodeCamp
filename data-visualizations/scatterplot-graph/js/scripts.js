@@ -61,6 +61,7 @@ d3.json(
   var tooltip = d3
     .select("body")
     .append("div")
+    .attr("id", "tooltip")
     .style("position", "absolute")
     .style("padding", "0 10px")
     .style("background", "white")
@@ -84,7 +85,9 @@ d3.json(
     .attr("cy", (d, i) => 0)
     .attr("r", 0)
     .attr("class", "dot")
-    .style("fill", "blue")
+    .style("fill", function(d) {
+      return d.Doping ? "rgb(31, 119, 180)" : "rgb(255, 127, 14)";
+    })
     .on("mouseover", function(d) {
       //show tooltip on mouseover
       tooltip
@@ -93,7 +96,8 @@ d3.json(
         .style("visibility", "visible")
         .style("opacity", 0.9);
       tooltip
-        .html(d)
+        .attr("data-year", d.Year)
+        .html(d.Year)
         .style("left", d3.event.pageX - 35 + "px")
         .style("top", d3.event.pageY - 30 + "px");
     })
@@ -116,6 +120,43 @@ d3.json(
     .attr("id", "y-axis")
     .attr("transform", "translate(40,0)")
     .call(yTicks);
+
+  //add legend
+  var doping = ["yes", "no"];
+
+  var legend = d3
+    .select("#visual svg")
+    .selectAll(".legend")
+    .data(doping)
+    .enter()
+    .append("g")
+    .attr("class", "legend")
+    .attr("id", "legend")
+    .attr("transform", function(d, i) {
+      return "translate(0," + (height / 2 - i * 20) + ")";
+    });
+
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  legend
+    .append("rect")
+    .attr("x", width - 18)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", color);
+
+  legend
+    .append("text")
+    .attr("x", width - 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .style("text-anchor", "end")
+    .text(function(d, i) {
+      if (i == 0) return "Riders with doping allegations";
+      else {
+        return "No doping allegations";
+      }
+    });
 
   //add transition effect
   myGraph
