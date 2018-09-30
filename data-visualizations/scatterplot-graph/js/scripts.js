@@ -7,22 +7,29 @@ d3.json(
     yRaceTimes = [],
     xRaceYears = [];
 
+  var formatYear = d3.timeParse("%Y");
+
   //Push race years/entries into respective arrays
   for (var i = 0; i < data.length; i++) {
-    xRaceYears.push(data[i].Year);
+    xRaceYears.push(formatYear(data[i].Year).getFullYear());
     yRaceTimes.push(data[i].Seconds);
   }
+
+  console.log(xRaceYears);
 
   //define x scale
   var xScale = d3
     .scaleLinear()
-    .domain([1993, 2016])
+    .domain([d3.min(xRaceYears), d3.max(xRaceYears)])
     .range([0, width]);
 
   //x axis values
   var xAxisValues = d3
-    .scaleLinear()
-    .domain([1993, 2016])
+    .scaleTime()
+    .domain([
+      new Date(d3.min(xRaceYears), 1, 1),
+      new Date(d3.max(xRaceYears), 1, 1)
+    ])
     .range([0, width]);
 
   //x tick marks
