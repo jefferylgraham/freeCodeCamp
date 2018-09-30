@@ -1,7 +1,7 @@
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json"
 ).then(function(data) {
-  var margin = { top: 0, right: 0, bottom: 20, left: 0 },
+  var margin = { top: 20, right: 0, bottom: 20, left: 40 },
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     yRaceTimes = [],
@@ -34,6 +34,15 @@ d3.json(
     .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
     .range([0, height]);
 
+  //define y axis values
+  var yAxisValues = d3
+    .scaleLinear()
+    .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
+    .range([height, 0]);
+
+  //y tick marks
+  var yTicks = d3.axisLeft(yAxisValues).ticks(12);
+
   //define tooltip
   var tooltip = d3
     .select("body")
@@ -51,6 +60,7 @@ d3.json(
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
     .append("g") //append group for x,y axis values
+    .attr("transform", "translate(" + margin.left + "," + margin.right + ")")
     .style("background", "#C9D7D6")
     .selectAll("circle")
     .data(data)
@@ -81,8 +91,14 @@ d3.json(
   var xGuide = d3
     .select("#visual svg")
     .append("g")
-    .attr("transform", "translate(20," + height + ")")
+    .attr("transform", "translate(40," + height + ")")
     .call(xTicks);
+
+  var yGuide = d3
+    .select("#visual svg")
+    .append("g")
+    .attr("transform", "translate(40,0)")
+    .call(yTicks);
 
   //add transition effect
   myGraph
