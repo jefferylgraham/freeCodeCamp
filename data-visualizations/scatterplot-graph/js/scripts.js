@@ -11,25 +11,32 @@ d3.json(
 
   //Push race years/entries into respective arrays
   for (var i = 0; i < data.length; i++) {
-    xRaceYears.push(formatYear(data[i].Year).getFullYear());
-    yRaceTimes.push(data[i].Seconds);
+    xRaceYears.push(data[i].Year);
+    yRaceTimes.push(data[i].Time);
   }
 
-  console.log(xRaceYears);
+  //parse times for yRaceTimes
+  var specifier = "%M:%S";
+  var parsedTimes = yRaceTimes.map(function(d) {
+    return d3.timeParse(specifier)(d);
+  });
+
+  //parse times for xRaceYears
+  var specifier = "%Y";
+  var parsedYears = xRaceYears.map(function(d) {
+    return d3.timeParse(specifier)(d);
+  });
 
   //define x scale
   var xScale = d3
     .scaleLinear()
-    .domain([d3.min(xRaceYears), d3.max(xRaceYears)])
+    .domain([d3.min(parsedYears), d3.max(parsedYears)])
     .range([0, width]);
 
   //x axis values
   var xAxisValues = d3
     .scaleTime()
-    .domain([
-      new Date(d3.min(xRaceYears), 1, 1),
-      new Date(d3.max(xRaceYears), 1, 1)
-    ])
+    .domain([d3.min(parsedYears), d3.max(parsedYears)])
     .range([0, width]);
 
   //x tick marks
@@ -38,14 +45,14 @@ d3.json(
   //define y scale
   var yScale = d3
     .scaleLinear()
-    .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
+    .domain([d3.min(parsedTimes), d3.max(parsedTimes)])
     .range([0, height]);
 
   //define y axis values
   var yAxisValues = d3
-    .scaleLinear()
-    .domain([d3.min(yRaceTimes), d3.max(yRaceTimes)])
-    .range([height, 0]);
+    .scaleTime()
+    .domain([d3.min(parsedTimes), d3.max(parsedTimes)])
+    .range([0, height]);
 
   //y tick marks
   var yTicks = d3.axisLeft(yAxisValues).tickFormat(d3.timeFormat("%M:%S"));
@@ -76,6 +83,7 @@ d3.json(
     .attr("cx", (d, i) => 0)
     .attr("cy", (d, i) => 0)
     .attr("r", 0)
+    .attr("class", "dot")
     .style("fill", "blue")
     .on("mouseover", function(d) {
       //show tooltip on mouseover
@@ -98,21 +106,25 @@ d3.json(
   var xGuide = d3
     .select("#visual svg")
     .append("g")
+    .attr("id", "x-axis")
     .attr("transform", "translate(40," + height + ")")
     .call(xTicks);
 
   var yGuide = d3
     .select("#visual svg")
     .append("g")
+    .attr("id", "y-axis")
     .attr("transform", "translate(40,0)")
     .call(yTicks);
 
   //add transition effect
   myGraph
     .transition()
-    .attr("cx", (d, i) => xScale(data[i].Year))
-    .attr("cy", (d, i) => yScale(data[i].Seconds))
-    .attr("r", 5)
+    .attr("cx", (d, i) => xScale(parsedYears[i]))
+    .attr("cy", (d, i) => yScale(parsedTimes[i]))
+    .attr("r", 6)
+    .attr("data-xvalue", (d, i) => parsedYears[i].getFullYear())
+    .attr("data-yvalue", (d, i) => parsedTimes[i])
     .duration(1000)
     .ease(d3.easeCircleIn);
 });
