@@ -26,7 +26,7 @@ d3.json(
     .range([0, width]);
 
   //x tick marks
-  var xTicks = d3.axisBottom(xAxisValues).ticks(12);
+  var xTicks = d3.axisBottom(xAxisValues).tickFormat(d3.timeFormat("%Y"));
 
   //define y scale
   var yScale = d3
@@ -41,7 +41,7 @@ d3.json(
     .range([height, 0]);
 
   //y tick marks
-  var yTicks = d3.axisLeft(yAxisValues).ticks(12);
+  var yTicks = d3.axisLeft(yAxisValues).tickFormat(d3.timeFormat("%M:%S"));
 
   //define tooltip
   var tooltip = d3
