@@ -17,6 +17,7 @@ d3.json(
     .range([0, width]);
 
   //Define x axis values
+  var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
 
   //draw svg
   var svg = d3
