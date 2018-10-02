@@ -6,9 +6,16 @@ d3.json(
     width = 1500 - margin.right - margin.left;
 
   //Map the years from the data object
-  var xYears = d3.set(data.monthlyVariance.map(entry => entry.year)).values();
+  var xYears = d3
+    .set(data.monthlyVariance.map(entry => new Date(entry.year, 1, 1)))
+    .values();
 
   //Define x scale
+  var xScale = d3
+    .scaleTime()
+    .domain(xYears)
+    .range([0, width]);
+
   //Define x axis values
 
   //draw svg
