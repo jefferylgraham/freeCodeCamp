@@ -8,30 +8,14 @@ d3.json(
   //Map the years from the data object
   var xYears = d3.set(data.monthlyVariance.map(entry => entry.year)).values();
 
-  //define x scale
+  //Define x scale
   //Define x axis values
-  var xAxisValues = d3
-    .scaleTime()
-    .domain([new Date(xYears[0]), new Date(xYears[xYears.length - 1])])
-    .range([0, width]);
 
-  //define x tick marks
-  var xTicks = d3.axisBottom(xAxisValues).ticks(d3.timeYear.every(5));
-
-  //draw svg area
-  var myChart = d3
+  //draw svg
+  var svg = d3
     .select("#heatmap")
     .append("svg")
-    .attr("height", height)
-    .attr("width", width)
-    .append("g")
-    .attr("transform", "translate(20,0)")
-    .style("background", "orange");
-
-  var xGuide = d3
-    .select("#heatmap svg")
-    .append("g")
-    .attr("id", "x-axis")
-    .attr("transform", "translate(40,380)")
-    .call(xTicks);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .style("background", "gray");
 });
