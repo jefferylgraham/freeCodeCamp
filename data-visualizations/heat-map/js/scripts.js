@@ -91,6 +91,10 @@ d3.json(
     .append("rect")
     .attr("width", width / 262)
     .attr("height", height / 12)
+    .attr("class", "cell")
+    .attr("data-month", d => months[d.month - 1])
+    .attr("data-year", d => d.year)
+    .attr("data-temp", d => (8.66 + d.variance).toFixed(1))
     .attr("x", (d, i) => xScale(new Date(d.year, 1, 1)))
     .attr("y", (d, i) => yScale(months[d.month - 1]))
     .attr("fill", d => color(d.variance));
