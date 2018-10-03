@@ -4,11 +4,27 @@ d3.json(
   var margin = { top: 20, right: 10, bottom: 20, left: 10 },
     height = 400 - margin.top - margin.bottom,
     width = 1500 - margin.right - margin.left;
-  console.log(height);
+
   //Map the years from the data object
   var xYears = d3
     .set(data.monthlyVariance.map(entry => new Date(entry.year, 1, 1)))
     .values();
+
+  var yMonths = d3.set(data.monthlyVariance.map(entry => entry.month)).values();
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   var xScale = d3
     .scaleLinear()
@@ -26,6 +42,12 @@ d3.json(
     .axisBottom(xAxisValues)
     .tickFormat(d3.timeFormat("%Y"))
     .ticks(d3.timeYear.every(10));
+
+  //define y scale
+  var yScale = d3
+    .scaleBand()
+    .domain(months)
+    .range([height, 0]);
 
   //draw svg
   var heatmap = d3
