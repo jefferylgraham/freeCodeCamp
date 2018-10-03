@@ -1,29 +1,46 @@
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json"
 ).then(function(data) {
-  var margin = { top: 0, right: 0, bottom: 0, left: 0 },
+  var margin = { top: 20, right: 10, bottom: 20, left: 10 },
     height = 400 - margin.top - margin.bottom,
     width = 1500 - margin.right - margin.left;
-
+  console.log(height);
   //Map the years from the data object
   var xYears = d3
     .set(data.monthlyVariance.map(entry => new Date(entry.year, 1, 1)))
     .values();
 
-  //Define x scale
   var xScale = d3
+    .scaleLinear()
+    .domain([new Date(xYears[0]), new Date(xYears[xYears.length - 1])])
+    .range([0, width]);
+
+  //Define x axis
+  var xAxisValues = d3
     .scaleTime()
-    .domain(xYears)
+    .domain([new Date(xYears[0]), new Date(xYears[xYears.length - 1])])
     .range([0, width]);
 
   //Define x axis values
-  var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
+  var xAxis = d3
+    .axisBottom(xAxisValues)
+    .tickFormat(d3.timeFormat("%Y"))
+    .ticks(d3.timeYear.every(10));
 
   //draw svg
-  var svg = d3
+  var heatmap = d3
     .select("#heatmap")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .style("background", "gray");
+    .style("background", "yellow")
+    .append("g") //append group for x,y axis values
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var xGuide = d3
+    .select("#heatmap svg")
+    .append("g")
+    .attr("id", "x-axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 });
