@@ -3,7 +3,7 @@ d3.json(
 ).then(function(data) {
   var margin = { top: 20, right: 10, bottom: 20, left: 70 },
     height = 400 - margin.top - margin.bottom,
-    width = 1000 - margin.right - margin.left;
+    width = 1500 - margin.right - margin.left;
 
   //Map the years from the data object
   var xYears = d3
@@ -64,7 +64,6 @@ d3.json(
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .style("background", "yellow")
     .append("g") //append group for x,y axis values
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -72,7 +71,7 @@ d3.json(
     .select("#heatmap svg")
     .append("g")
     .attr("id", "x-axis")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", "translate(70," + height + ")")
     .call(xAxis);
 
   var yGuide = d3
