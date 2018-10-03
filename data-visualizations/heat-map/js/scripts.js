@@ -1,9 +1,9 @@
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json"
 ).then(function(data) {
-  var margin = { top: 20, right: 10, bottom: 20, left: 10 },
+  var margin = { top: 20, right: 10, bottom: 20, left: 70 },
     height = 400 - margin.top - margin.bottom,
-    width = 1500 - margin.right - margin.left;
+    width = 1000 - margin.right - margin.left;
 
   //Map the years from the data object
   var xYears = d3
@@ -49,6 +49,15 @@ d3.json(
     .domain(months)
     .range([height, 0]);
 
+  //define y axis values
+  var yAxisValues = d3
+    .scaleBand()
+    .domain(months)
+    .range([0, height]);
+
+  //Define y axis values
+  var yAxis = d3.axisLeft(yAxisValues);
+
   //draw svg
   var heatmap = d3
     .select("#heatmap")
@@ -65,4 +74,11 @@ d3.json(
     .attr("id", "x-axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
+
+  var yGuide = d3
+    .select("#heatmap svg")
+    .append("g")
+    .attr("id", "y-axis")
+    .attr("transform", "translate(70,0)")
+    .call(yAxis);
 });
