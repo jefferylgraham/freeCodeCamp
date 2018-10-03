@@ -47,7 +47,7 @@ d3.json(
   var yScale = d3
     .scaleBand()
     .domain(months)
-    .range([height, 0]);
+    .range([0, height]);
 
   //define y axis values
   var yAxisValues = d3
@@ -58,6 +58,9 @@ d3.json(
   //Define y axis values
   var yAxis = d3.axisLeft(yAxisValues);
 
+  console.log(new Date(xYears[0]));
+  console.log(new Date(data.monthlyVariance[0].year, 1, 1));
+
   //draw svg
   var heatmap = d3
     .select("#heatmap")
@@ -65,7 +68,16 @@ d3.json(
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g") //append group for x,y axis values
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(70,0)")
+    .selectAll("rect")
+    .data(data.monthlyVariance)
+    .enter()
+    .append("rect")
+    .attr("width", width / 262)
+    .attr("height", height / 12)
+    .attr("x", (d, i) => xScale(new Date(d.year, 1, 1)))
+    .attr("y", (d, i) => yScale(months[d.month - 1]))
+    .style("fill", ["green"]);
 
   var xGuide = d3
     .select("#heatmap svg")
@@ -80,4 +92,6 @@ d3.json(
     .attr("id", "y-axis")
     .attr("transform", "translate(70,0)")
     .call(yAxis);
+
+  console.log("here");
 });

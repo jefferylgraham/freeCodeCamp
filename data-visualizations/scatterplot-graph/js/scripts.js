@@ -26,6 +26,7 @@ d3.json(
   var parsedYears = xRaceYears.map(function(d) {
     return d3.timeParse(specifier)(d);
   });
+  console.log(parsedYears);
 
   //define x scale
   var xScale = d3
