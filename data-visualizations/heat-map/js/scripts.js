@@ -61,6 +61,22 @@ d3.json(
   console.log(new Date(xYears[0]));
   console.log(new Date(data.monthlyVariance[0].year, 1, 1));
 
+  var color = d3
+    .scaleQuantize()
+    .domain(d3.extent(data.monthlyVariance, d => d.variance))
+    .range([
+      "rgb(49, 54, 149)",
+      "rgb(69, 117, 180)",
+      "rgb(116, 173, 209)",
+      "rgb(224, 243, 248)",
+      "rgb(255, 255, 191)",
+      "rgb(254, 224, 144)",
+      "rgb(253, 174, 97)",
+      "rgb(244, 109, 67)",
+      "rgb(215, 48, 39)",
+      "rgb(165, 0, 38)"
+    ]);
+
   //draw svg
   var heatmap = d3
     .select("#heatmap")
@@ -77,7 +93,7 @@ d3.json(
     .attr("height", height / 12)
     .attr("x", (d, i) => xScale(new Date(d.year, 1, 1)))
     .attr("y", (d, i) => yScale(months[d.month - 1]))
-    .style("fill", ["green"]);
+    .attr("fill", d => color(d.variance));
 
   var xGuide = d3
     .select("#heatmap svg")
