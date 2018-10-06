@@ -17,6 +17,8 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   //create Map of county ids & education rates
   var dataMap = new Map(data.map(d => [d.fips, d.bachelorsOrHigher]));
 
+  var tempColor;
+
   var width = 960,
     height = 700,
     path = d3.geoPath();
@@ -31,6 +33,17 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .domain(d3.extent(color.domain()))
     .rangeRound([600, 860]);
 
+  //define tooltip
+  var tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("position", "absolute")
+    .style("padding", "0 10px")
+    .style("background", "white")
+    .style("opacity", 0)
+    .style("visibilty", "hidden");
+
   //define svg area
   var choropleth = d3
     .select("#chloropleth")
@@ -39,7 +52,10 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .attr("width", width);
 
   //
-  var g = choropleth.append("g").attr("transform", "translate(0,40)");
+  var g = choropleth
+    .append("g")
+    .attr("id", "legend")
+    .attr("transform", "translate(0,40)");
 
   //draw legend
   g.selectAll("g")
@@ -59,7 +75,27 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .enter()
     .append("path")
     .attr("fill", d => color(dataMap.get(d.id))) //add color fill based on educational attainment
-    .attr("d", path);
+    .attr("class", "county")
+    .attr("data-fips", d => d.id)
+    .attr("data-eduction", d => dataMap.get(d.id))
+    .attr("d", path)
+    .on("mouseover", function(d) {
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0.9)
+        .style("visibility", "visible");
+      tooltip
+        .html(dataMap.get(d.id))
+        .style("left", d3.event.pageX - 35 + "px")
+        .style("top", d3.event.pageY - 35 + "px");
+      tempColor = this.style.fill;
+      d3.select(this).style("fill", "white");
+    })
+    .on("mouseout", function(d) {
+      tooltip.html("").style("visibility", "hidden");
+      d3.select(this).style("fill", tempColor);
+    });
 
   //add white border to states
   choropleth
