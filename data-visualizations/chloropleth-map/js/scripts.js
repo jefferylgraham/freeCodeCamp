@@ -11,6 +11,9 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
   //topology json
   var us = values[0];
 
+  //education data
+  var data = values[1];
+
   var width = 960,
     height = 700,
     path = d3.geoPath();
@@ -20,7 +23,7 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
     .domain([1, 10])
     .range(d3.schemeBlues[9]);
 
-  var x = d3
+  var xScale = d3
     .scaleLinear()
     .domain(d3.extent(color.domain()))
     .rangeRound([600, 860]);
@@ -34,6 +37,16 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
 
   //
   var g = choropleth.append("g").attr("transform", "translate(0,40)");
+
+  //draw legend
+  g.selectAll("g")
+    .data(color.range().map(d => color.invertExtent(d)))
+    .enter()
+    .append("rect")
+    .attr("height", 8)
+    .attr("x", d => xScale(d[0]))
+    .attr("width", d => xScale(d[1]) - xScale(d[0]))
+    .attr("fill", d => color(d[0]));
 
   //define group for drawing topology - draw counties
   choropleth
