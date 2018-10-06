@@ -35,7 +35,7 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
   //
   var g = choropleth.append("g").attr("transform", "translate(0,40)");
 
-  //define group for drawing topology
+  //define group for drawing topology - draw counties
   choropleth
     .append("g")
     .selectAll("path")
@@ -44,13 +44,16 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
     .append("path")
     .attr("d", path);
 
-  //add borders to counties
-  choropleth.append("path").attr(
-    "d",
-    path(
-      topojson.mesh(us, us.objects.counties, function(a, b) {
+  //add white border to states
+  choropleth
+    .append("path")
+    .datum(
+      topojson.mesh(us, us.objects.states, function(a, b) {
         return a !== b;
       })
     )
-  );
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path);
 });
