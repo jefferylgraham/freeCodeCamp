@@ -77,7 +77,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .attr("fill", d => color(dataMap.get(d.id))) //add color fill based on educational attainment
     .attr("class", "county")
     .attr("data-fips", d => d.id)
-    .attr("data-eduction", d => dataMap.get(d.id))
+    .attr("data-education", d => dataMap.get(d.id))
     .attr("d", path)
     .on("mouseover", function(d) {
       tooltip
@@ -87,8 +87,11 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
         .style("visibility", "visible");
       tooltip
         .html(dataMap.get(d.id))
+        .attr("data-education", dataMap.get(d.id))
         .style("left", d3.event.pageX - 35 + "px")
         .style("top", d3.event.pageY - 35 + "px");
+
+      //add fill on mouseover
       tempColor = this.style.fill;
       d3.select(this).style("fill", "white");
     })
