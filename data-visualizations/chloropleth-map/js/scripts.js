@@ -15,6 +15,16 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
     height = 700,
     path = d3.geoPath();
 
+  var color = d3
+    .scaleQuantize()
+    .domain([1, 10])
+    .range(d3.schemeBlues[9]);
+
+  var x = d3
+    .scaleLinear()
+    .domain(d3.extent(color.domain()))
+    .rangeRound([600, 860]);
+
   //define svg area
   var choropleth = d3
     .select("#chloropleth")
@@ -22,10 +32,12 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
     .attr("height", height)
     .attr("width", width);
 
+  //
+  var g = choropleth.append("g").attr("transform", "translate(0,40)");
+
   //define group for drawing topology
   choropleth
     .append("g")
-    .attr("class", "counties")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
     .enter()
@@ -33,15 +45,12 @@ Promise.all(data.map(url => d3.json(url))).then(function(values) {
     .attr("d", path);
 
   //add borders to counties
-  choropleth
-    .append("path")
-    .attr("class", "county-borders")
-    .attr(
-      "d",
-      path(
-        topojson.mesh(us, us.objects.counties, function(a, b) {
-          return a !== b;
-        })
-      )
-    );
+  choropleth.append("path").attr(
+    "d",
+    path(
+      topojson.mesh(us, us.objects.counties, function(a, b) {
+        return a !== b;
+      })
+    )
+  );
 });
