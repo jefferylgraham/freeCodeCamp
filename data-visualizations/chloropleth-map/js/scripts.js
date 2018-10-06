@@ -58,6 +58,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .data(topojson.feature(us, us.objects.counties).features)
     .enter()
     .append("path")
+    .attr("fill", d => color(dataMap.get(d.id))) //add color fill based on educational attainment
     .attr("d", path);
 
   //add white border to states
