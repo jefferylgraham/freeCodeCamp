@@ -5,14 +5,17 @@ var educationJson =
   "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json";
 
 //save json data in array for Promises
-var data = [topologyJson, educationJson];
+var dataFiles = [topologyJson, educationJson];
 
-Promise.all(data.map(url => d3.json(url))).then(function(values) {
+Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   //topology json
   var us = values[0];
 
   //education data
   var data = values[1];
+
+  //create Map of county ids & education rates
+  var dataMap = new Map(data.map(d => [d.fips, d.bachelorsOrHigher]));
 
   var width = 960,
     height = 700,
