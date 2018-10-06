@@ -24,7 +24,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   var color = d3
     .scaleQuantize()
     .domain([2.6, 75.1]) //range of educational attainment
-    .range(d3.schemeBlues[9]);
+    .range(d3.schemeReds[9]);
 
   var xScale = d3
     .scaleLinear()
