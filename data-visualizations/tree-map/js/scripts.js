@@ -11,25 +11,22 @@ var videoGameSalesJson =
 var dataFiles = [kickstarterJson, movieDataJson, videoGameSalesJson];
 
 Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
+  //test json data
+  let data = values[0];
+
   //define margin, width, height, color
   const margin = { top: 40, right: 10, bottom: 10, left: 10 },
     width = 960 - margin.right - margin.left,
-    height = 500 - margin.top - margin.bottom,
+    height = 600 - margin.top - margin.bottom,
     color = d3.scaleOrdinal(d3.schemeCategory20);
 
-  //define treemap and its dimensions
-  const treeMap = d3.treemap().size([width, height]);
-
-  //draw map area
-  const map = d3
-    .select("#tree")
-    .append("div")
-    .style("position", "relative")
-    .style("width", width + margin.left + margin.right)
-    .style("height", height + margin.top + margin.bottom)
-    .style("left", margin.left + "px")
-    .style("top", margin.top + "px");
+  //draw svg
+  d3.select("#tree")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .style("background", "#C9D7D6");
 
   //error check
-  console.log("no errors");
+  console.log(tree);
 });
