@@ -21,11 +21,15 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     color = d3.scaleOrdinal(d3.schemeCategory20);
 
   //draw svg
-  d3.select("#tree")
+  var map = d3
+    .select("#tree")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
     .style("background", "#C9D7D6");
+
+  //add group to svg
+  map.append("g");
 
   //error check
   console.log(tree);
