@@ -9,4 +9,9 @@ html, body {
 
   rect {
   stroke: white;
+  display: block;
+  }
+
+  text {
+    font-size: 10px;
   }
