@@ -76,6 +76,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
         .style("visibility", "visible");
       tooltip
         .html(d.data.value)
+        .attr("data-value", d.data.value)
         .style("left", d3.event.pageX + "px")
         .style("top", d3.event.pageY + "px");
     })
