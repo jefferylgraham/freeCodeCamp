@@ -20,6 +20,17 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     height = 600 - margin.top - margin.bottom,
     color = d3.scaleOrdinal(d3.schemeCategory10);
 
+  //Define tooltip
+  var tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("position", "absolute")
+    .style("padding", "0 10px")
+    .style("background", "white")
+    .style("opacity", 0)
+    .style("visibilty", "hidden");
+
   //draw svg
   var map = d3
     .select("#tree")
@@ -56,7 +67,21 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .attr("data-value", d => d.data.value)
     .attr("width", d => d.x1 - d.x0)
     .attr("height", d => d.y1 - d.y0)
-    .attr("fill", d => color(d.data.category));
+    .attr("fill", d => color(d.data.category))
+    .on("mouseover", function(d) {
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0.6)
+        .style("visibility", "visible");
+      tooltip
+        .html(d.data.value)
+        .style("left", d3.event.pageX + "px")
+        .style("top", d3.event.pageY + "px");
+    })
+    .on("mouseout", function(d) {
+      tooltip.html("").style("visibility", "hidden");
+    });
 
   nodes
     .append("text")
