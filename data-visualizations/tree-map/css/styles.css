@@ -8,7 +8,5 @@ html, body {
   }
 
   rect {
-    fill: cadetblue;
-  opacity: 0.3;
   stroke: white;
   }

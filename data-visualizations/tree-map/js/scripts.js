@@ -33,7 +33,10 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
 
   var treemapLayout = d3.treemap().size([width, height]);
 
-  var root = d3.hierarchy(data).sum(d => d.value);
+  var root = d3
+    .hierarchy(data)
+    .sum(d => d.value)
+    .sort((a, b) => b.height - a.height || b.value - a.value);
 
   var tree = treemapLayout(root);
 
