@@ -54,6 +54,9 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .attr("height", d => d.y1 - d.y0)
     .attr("fill", d => color(d.data.category));
 
-  //error check
-  console.log(tree);
+  nodes
+    .append("text")
+    .attr("dx", 4)
+    .attr("dy", 14)
+    .text(d => d.data.name);
 });
