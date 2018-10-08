@@ -6,3 +6,9 @@ html, body {
     justify-content: center;
     align-items: center;
   }
+
+  rect {
+    fill: cadetblue;
+  opacity: 0.3;
+  stroke: white;
+  }

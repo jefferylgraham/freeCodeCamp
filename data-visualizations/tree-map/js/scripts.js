@@ -31,6 +31,25 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   //add group to svg
   map.append("g");
 
+  var treemapLayout = d3.treemap().size([width, height]);
+
+  var root = d3.hierarchy(data).sum(d => d.value);
+
+  var tree = treemapLayout(root);
+
+  var nodes = d3
+    .select("#tree svg g")
+    .selectAll("g")
+    .data(root.descendants())
+    .enter()
+    .append("g")
+    .attr("transform", d => "translate(" + [d.x0, d.y0] + ")");
+
+  nodes
+    .append("rect")
+    .attr("width", d => d.x1 - d.x0)
+    .attr("height", d => d.y1 - d.y0);
+
   //error check
   console.log(tree);
 });
