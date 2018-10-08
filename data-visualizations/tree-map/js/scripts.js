@@ -100,4 +100,56 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .attr("dx", 4)
     .attr("dy", 14)
     .text(d => d.data.name);
+
+  //create legend
+  var legendArray = [
+    "Action",
+    "Drama",
+    "Biography",
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Family"
+  ];
+  var legend = d3
+    .select("#legend")
+    .append("g")
+    .attr("transform", "translate(0,30)");
+
+  legend
+    .append("text")
+    .style("font-weight", "bold")
+    .attr("x", 10)
+    .attr("y", -10)
+    .text("Legend");
+
+  // create g for each legend item
+  var legendItem = legend
+    .selectAll(".legend-item")
+    .data(legendArray)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", function(d, i) {
+      return "translate(10," + i * 25 + ")";
+    });
+
+  // legend rectangle
+  legendItem
+    .append("rect")
+    .attr("class", "legend-item")
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", function(d, i) {
+      return color(legendArray[i]);
+    });
+
+  // legend text
+  legendItem
+    .append("text")
+    .attr("x", 25)
+    .attr("y", 15)
+    .text(function(d) {
+      return d;
+    });
 });

@@ -1,11 +1,14 @@
-html, body {
-    margin: 0;
-    height: 100%;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-  }
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  font: 10px sans-serif;
+  text-align: center;
+  display: block;
+  margin: auto;
+}
 
   rect {
   stroke: white;
