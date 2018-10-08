@@ -18,7 +18,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   const margin = { top: 40, right: 10, bottom: 10, left: 10 },
     width = 960 - margin.right - margin.left,
     height = 600 - margin.top - margin.bottom,
-    color = d3.scaleOrdinal(d3.schemeCategory20);
+    color = d3.scaleOrdinal(d3.schemeCategory10);
 
   //draw svg
   var map = d3
@@ -51,7 +51,8 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   nodes
     .append("rect")
     .attr("width", d => d.x1 - d.x0)
-    .attr("height", d => d.y1 - d.y0);
+    .attr("height", d => d.y1 - d.y0)
+    .attr("fill", d => color(d.data.category));
 
   //error check
   console.log(tree);
