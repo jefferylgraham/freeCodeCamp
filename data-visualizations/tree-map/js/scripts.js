@@ -15,9 +15,9 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   let data = values[1];
 
   //define margin, width, height, color
-  const margin = { top: 40, right: 10, bottom: 10, left: 10 },
+  const margin = { top: 0, right: 0, bottom: 0, left: 0 },
     width = 960 - margin.right - margin.left,
-    height = 600 - margin.top - margin.bottom,
+    height = 570 - margin.top - margin.bottom,
     color = d3.scaleOrdinal(d3.schemeCategory10);
 
   //Define tooltip
@@ -35,6 +35,8 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   var map = d3
     .select("#tree")
     .append("svg")
+    .attr("x", 0)
+    .attr("y", 0)
     .attr("width", width)
     .attr("height", height)
     .style("background", "#C9D7D6");
@@ -42,7 +44,10 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   //add group to svg
   map.append("g");
 
-  var treemapLayout = d3.treemap().size([width, height]);
+  var treemapLayout = d3
+    .treemap()
+    .size([width, height])
+    .paddingInner(1);
 
   var root = d3
     .hierarchy(data)
@@ -54,13 +59,17 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   var nodes = d3
     .select("#tree svg g")
     .selectAll("g")
-    .data(root.descendants())
+    .data(root.leaves())
     .enter()
     .append("g")
+    .attr("class", "group")
     .attr("transform", d => "translate(" + d.x0 + "," + d.y0 + ")");
 
   nodes
     .append("rect")
+    .attr("id", function(d) {
+      return d.data.name;
+    })
     .attr("class", "tile")
     .attr("width", d => d.x1 - d.x0)
     .attr("height", d => d.y1 - d.y0)
@@ -75,11 +84,7 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     })
     .attr("fill", d => color(d.data.category))
     .on("mouseover", function(d) {
-      tooltip
-        .transition()
-        .duration(200)
-        .style("opacity", 0.9)
-        .style("visibility", "visible");
+      tooltip.style("opacity", 0.9).style("visibility", "visible");
       tooltip
         .html(d.data.value)
         .attr("data-value", d.data.value)
