@@ -57,22 +57,28 @@ Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
     .data(root.descendants())
     .enter()
     .append("g")
-    .attr("transform", d => "translate(" + [d.x0, d.y0] + ")");
+    .attr("transform", d => "translate(" + d.x0 + "," + d.y0 + ")");
 
   nodes
     .append("rect")
     .attr("class", "tile")
-    .attr("data-name", d => d.data.name)
-    .attr("data-category", d => d.data.category)
-    .attr("data-value", d => d.data.value)
     .attr("width", d => d.x1 - d.x0)
     .attr("height", d => d.y1 - d.y0)
+    .attr("data-name", function(d) {
+      return d.data.name;
+    })
+    .attr("data-category", function(d) {
+      return d.data.category;
+    })
+    .attr("data-value", function(d) {
+      return d.data.value;
+    })
     .attr("fill", d => color(d.data.category))
     .on("mouseover", function(d) {
       tooltip
         .transition()
         .duration(200)
-        .style("opacity", 0.6)
+        .style("opacity", 0.9)
         .style("visibility", "visible");
       tooltip
         .html(d.data.value)
