@@ -12,7 +12,7 @@ var dataFiles = [kickstarterJson, movieDataJson, videoGameSalesJson];
 
 Promise.all(dataFiles.map(url => d3.json(url))).then(function(values) {
   //test json data
-  let data = values[0];
+  let data = values[1];
 
   //define margin, width, height, color
   const margin = { top: 40, right: 10, bottom: 10, left: 10 },
